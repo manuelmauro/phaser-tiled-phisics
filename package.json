@@ -1,0 +1,42 @@
+{
+  "name": "phaser-tiled-physics",
+  "version": "0.1.0",
+  "description": "Phaser 3 Tiled Physics Plugin",
+  "main": "src/TiledPhysics.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "browser-sync": "^2.23.6",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "copy-webpack-plugin": "^4.5.1",
+    "dat.gui": "^0.7.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "phaser": "^3.3.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^3.10.0"
+  }
+}
