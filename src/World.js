@@ -5,6 +5,7 @@
  */
 
 import Body from './Body';
+import CONST from './const';
 
 export default class World {
   constructor(scene, config) {
@@ -24,7 +25,7 @@ export default class World {
      * @type
      * @since 0.1.0
      */
-    this.bodies = new Set();
+    this.bodies = new Phaser.Structs.Set();
 
     /**
      * [description]
@@ -33,7 +34,7 @@ export default class World {
      * @type
      * @since 0.1.0
      */
-    this.pendingDestroy = new Set();
+    this.tilesize = new Phaser.Math.Vector2(CONST.TILE_WIDTH, CONST.TILE_HEIGHT);
 
     /**
      * [description]
@@ -42,7 +43,16 @@ export default class World {
      * @type
      * @since 0.1.0
      */
-    this.colliders = new ProcessQueue();
+    this.pendingDestroy = new Phaser.Structs.Set();
+
+    /**
+     * [description]
+     *
+     * @name
+     * @type
+     * @since 0.1.0
+     */
+    this.colliders = new Phaser.Structs.ProcessQueue();
 
     /**
      * [description]
@@ -52,10 +62,10 @@ export default class World {
      * @since 0.1.0
      */
     this.checkCollision = {
-      up: GetValue(config, 'checkCollision.up', true),
-      down: GetValue(config, 'checkCollision.down', true),
-      left: GetValue(config, 'checkCollision.left', true),
-      right: GetValue(config, 'checkCollision.right', true),
+      up: true,
+      down: true,
+      left: true,
+      right: true,
     };
   }
 
@@ -69,7 +79,9 @@ export default class World {
    *
    */
   enable(object) {
+    object.body = new Body(this, object);
 
+    this.bodies.set(object.body);
   }
 
   /**
@@ -186,7 +198,7 @@ export default class World {
    *
    */
   update(time, delta) {
-
+    this.bodies.each((body) => { if (body.enable) body.update(delta); });
   }
 
   /**
@@ -197,7 +209,7 @@ export default class World {
    *
    */
   postUpdate() {
-
+    this.bodies.each((body) => { if (body.enable) body.postUpdate(); });
   }
 
   /**
