@@ -1,1 +1,0 @@
-/home/manuel/workspace/phaser-tiled-physics/dist/TiledPhysics.js

@@ -15,16 +15,19 @@ class Game extends Phaser.Scene {
       'assets/images/hero.png',
       { frameWidth: 16, frameHeight: 16, endFrame: 39 },
     );
-    // this.load.plugin('TiledPhysics', 'assets/plugins/TiledPhysics.js');
+    this.load.plugin('TiledPhysics', 'TiledPhysics.js');
   }
 
   create() {
-    // this.sys.install('TiledPhysics');
+    this.sys.install('TiledPhysics');
 
     makeAnimations(this);
 
     this.player = this.add.sprite(48, 48);
     this.player.play('hero_face_down');
+
+    this.physics.world.enable(this.player);
+    this.player.body.setVelocityX(1);
 
     this.keys = {
       up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
@@ -36,14 +39,18 @@ class Game extends Phaser.Scene {
 
   update(time, delta) {
     let animDir = '';
-    if (this.keys.up.isDown) {
-      animDir = 'up';
-    } else if (this.keys.right.isDown) {
-      animDir = 'right';
-    } else if (this.keys.down.isDown) {
+    if (this.keys.down.isDown) {
       animDir = 'down';
+      this.player.body.setVelocityY(50);
     } else if (this.keys.left.isDown) {
       animDir = 'left';
+      this.player.body.setVelocityX(-50);
+    } else if (this.keys.right.isDown) {
+      animDir = 'right';
+      this.player.body.setVelocityX(50);
+    } else if (this.keys.up.isDown) {
+      animDir = 'up';
+      this.player.body.setVelocityY(-50);
     }
     const anim = `hero_walk_${animDir}`;
     if (anim !== this.player.anims.currentAnim.key) {

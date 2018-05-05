@@ -13,7 +13,7 @@ const definePlugin = new webpack.DefinePlugin({
 
 module.exports = {
   entry: {
-    TiledPhysics: './src/main.js',
+    TiledPhysics: './src/TiledPhysics.js',
     demo: [
       'babel-polyfill',
       path.resolve(__dirname, 'demo/js/main.js'),
