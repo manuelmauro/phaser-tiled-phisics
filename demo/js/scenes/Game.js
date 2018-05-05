@@ -27,7 +27,7 @@ class Game extends Phaser.Scene {
     this.player.play('hero_face_down');
 
     this.physics.world.enable(this.player);
-    this.player.body.setVelocityX(1);
+    this.player.body.setOffset(4, 8);
 
     this.keys = {
       up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
