@@ -5,7 +5,7 @@
   "main": "src/TiledPhysics.js",
   "scripts": {
     "build": "webpack",
-    "dev": ""
+    "dev": "webpack --config webpack.demo.config.js"
   },
   "repository": {
     "type": "git",
