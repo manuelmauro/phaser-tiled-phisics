@@ -51,7 +51,7 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.position = new Phaser.Math.Vector2(gameObject.x, gameObject.y);
+    this.position = new Phaser.Math.Vector2();
 
     /**
      * [description]
@@ -61,6 +61,7 @@ class Body {
      * @since 0.1.0
      */
     this.tile = new Phaser.Math.Vector2();
+    this.snapToGrid();
 
     /**
      * [description]
@@ -78,7 +79,7 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.width = CONST.TILE_WIDTH;
+    this.width = this.world.tilesize.x;
 
     /**
      * [description]
@@ -87,7 +88,7 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.height = CONST.TILE_HEIGHT;
+    this.height = this.world.tilesize.y;
 
     /**
      * [description]
@@ -164,19 +165,34 @@ class Body {
    *
    */
   update(delta) {
-    const next = { };
+    // the body is not moving, nothing to update
+    if (!this.velocity.x && !this.velocity.y) { return; }
+
+    // compute the behavior of the next tile the body is moving on
+    if (this.velocity.x > 0) {
+      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.RIGHT);
+    } else if (this.velocity.x < 0) {
+      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.LEFT);
+    } else if (this.velocity.y > 0) {
+      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.DOWN);
+    } else if (this.velocity.y < 0) {
+      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.UP);
+    }
 
     // x axis
+    const next = { };
     next.x = this.position.x + (this.velocity.x * (delta / 1000));
     const twidth = this.world.tilesize.x;
 
     if (Math.floor(next.x / twidth) > Math.floor(this.position.x / twidth)) {
       // the body moved one tile right
-      this.position.x = Math.floor(next.x / twidth) * twidth;
+      this.tile.x = Math.floor(next.x / twidth);
+      this.position.x = this.tile.x * twidth;
       this.velocity.x = 0;
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
-      this.position.x = Math.ceil(next.x / twidth) * twidth;
+      this.tile.x = Math.ceil(next.x / twidth);
+      this.position.x = this.tile.x * twidth;
       this.velocity.x = 0;
     } else {
       // the body is moving between two tiles
@@ -189,11 +205,13 @@ class Body {
 
     if (Math.floor(next.y / theight) > Math.floor(this.position.y / theight)) {
       // the body moved one tile down
-      this.position.y = Math.floor(next.y / theight) * theight;
+      this.tile.y = Math.floor(next.y / theight);
+      this.position.y = this.tile.y * theight;
       this.velocity.y = 0;
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
-      this.position.y = Math.ceil(next.y / theight) * theight;
+      this.tile.y = Math.ceil(next.y / theight);
+      this.position.y = this.tile.y * theight;
       this.velocity.y = 0;
     } else {
       // the body is moving between two tiles
@@ -250,8 +268,10 @@ class Body {
   }
 
   /**
-   * Resets this Body to the given coordinates. Also positions its parent Game Object to the same coordinates.
-   * If the body had any velocity or acceleration it is lost as a result of calling this.
+   * Resets this Body to the given coordinates. Also positions its parent
+   * Game Object to the same coordinates.
+   * If the body had any velocity or acceleration it is lost as a result
+   * of calling this.
    *
    * @method
    * @since 0.1.0
@@ -298,6 +318,10 @@ class Body {
    * @return This Body object.
    */
   setVelocityX(value) {
+    if (this.velocity.y !== 0) {
+      return this;
+    }
+
     this.velocity.x = value;
     this.velocity.y = 0;
 
@@ -315,6 +339,10 @@ class Body {
    * @return This Body object.
    */
   setVelocityY(value) {
+    if (this.velocity.x !== 0) {
+      return this;
+    }
+
     this.velocity.x = 0;
     this.velocity.y = value;
 
@@ -361,12 +389,11 @@ class Body {
    *
    */
   snapToGrid() {
-    this.tile = {
-      x: Math.round(this.gameObject.x / CONST.TILE_WIDTH),
-      y: Math.round(this.gameObject.y / CONST.TILE_HEIGHT),
-    };
-    this.gameObject.x = CONST.TILE_WIDTH * this.tile.x;
-    this.gameObject.y = CONST.TILE_HEIGHT * this.tile.y;
+    this.tile.x = Math.round(this.gameObject.x / this.world.tilesize.x);
+    this.tile.y = Math.round(this.gameObject.y / this.world.tilesize.y);
+
+    this.position.x = this.world.tilesize.x * this.tile.x;
+    this.position.y = this.world.tilesize.y * this.tile.y;
   }
 }
 

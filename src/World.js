@@ -5,6 +5,7 @@
  */
 
 import Body from './Body';
+import Tilemap from './Tilemap';
 import CONST from './const';
 
 export default class World {
@@ -26,6 +27,15 @@ export default class World {
      * @since 0.1.0
      */
     this.bodies = new Phaser.Structs.Set();
+
+    /**
+     * [description]
+     *
+     * @name
+     * @type
+     * @since 0.1.0
+     */
+    this.tilemap = new Tilemap(this);
 
     /**
      * [description]
@@ -79,9 +89,17 @@ export default class World {
    *
    */
   enable(object) {
-    object.body = new Body(this, object);
-
-    this.bodies.set(object.body);
+    switch (object.type) {
+      case 'Sprite':
+        object.body = new Body(this, object);
+        this.bodies.set(object.body);
+        break;
+      case 'StaticTilemapLayer':
+        this.tilemap.layers.set(object.layer.data);
+        this.tilemap.tilesets.set(object.tileset.tileProperties);
+        break;
+      default:
+    }
   }
 
   /**

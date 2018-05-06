@@ -10,24 +10,43 @@ class Game extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image('basictiles', 'assets/images/basictiles.png');
+    this.load.tilemapTiledJSON('map', 'assets/maps/demo.json');
+
     this.load.spritesheet(
       'hero',
       'assets/images/hero.png',
       { frameWidth: 16, frameHeight: 16, endFrame: 39 },
     );
+
+    // first you need to load the plugin
     this.load.plugin('TiledPhysics', 'TiledPhysics.js');
   }
 
   create() {
+    // and then install it
     this.sys.install('TiledPhysics');
+
+    const map = this.make.tilemap({ key: 'map' });
+    const tiles = map.addTilesetImage('basictiles', 'basictiles');
+
+    const zero = map.createStaticLayer('zero', tiles, 0, 0);
+    const one = map.createStaticLayer('one', tiles, 0, 0);
+    const two = map.createStaticLayer('two', tiles, 0, 0);
 
     makeAnimations(this);
 
-    this.player = this.add.sprite(48, 48);
+    this.player = this.add.sprite(45, 49);
     this.player.play('hero_face_down');
 
+    this.physics.world.enable(zero);
+    this.physics.world.enable(one);
+    this.physics.world.enable(two);
     this.physics.world.enable(this.player);
     this.player.body.setOffset(4, 8);
+
+    this.cameras.main.startFollow(this.player);
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
     this.keys = {
       up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),

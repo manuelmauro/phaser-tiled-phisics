@@ -18,7 +18,7 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   TILE_WIDTH: 8,
   /**
@@ -27,7 +27,7 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   TILE_HEIGHT: 8,
 
@@ -37,7 +37,7 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   FACING_NONE: 10,
 
@@ -47,7 +47,7 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   FACING_UP: 11,
 
@@ -57,7 +57,7 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   FACING_DOWN: 12,
 
@@ -67,7 +67,7 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   FACING_LEFT: 13,
 
@@ -77,10 +77,49 @@ const CONST = {
      * @name
      * @readOnly
      * @type {number}
-     * @since 3.0.0
+     * @since 0.1.0
      */
   FACING_RIGHT: 14,
 
+  /**
+     * [description]
+     *
+     * @name
+     * @readOnly
+     * @type {number}
+     * @since 0.1.0
+     */
+  UP: 11,
+
+  /**
+     * [description]
+     *
+     * @name
+     * @readOnly
+     * @type {number}
+     * @since 0.1.0
+     */
+  DOWN: 12,
+
+  /**
+     * [description]
+     *
+     * @name
+     * @readOnly
+     * @type {number}
+     * @since 0.1.0
+     */
+  LEFT: 13,
+
+  /**
+     * [description]
+     *
+     * @name
+     * @readOnly
+     * @type {number}
+     * @since 0.1.0
+     */
+  RIGHT: 14,
 };
 
 module.exports = CONST;

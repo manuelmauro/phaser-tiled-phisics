@@ -5,7 +5,6 @@
  */
 
 import World from './World';
-import Tilemap from './Tilemap';
 
 class TiledPhysics {
   constructor(scene) {
@@ -36,15 +35,6 @@ class TiledPhysics {
      * @since 0.1.0
      */
     this.world = new World();
-
-    /**
-     * [description]
-     *
-     * @name Phaser.Physics.Tiled.TiledPhysics#
-     * @type
-     * @since 0.1.0
-     */
-    this.tilemap = new Tilemap();
 
     /**
      * [description]
