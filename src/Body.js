@@ -209,8 +209,8 @@ class Body {
    *
    */
   postUpdate() {
-    this.gameObject.x = this.position.x + this.offset.x;
-    this.gameObject.y = this.position.y + this.offset.y;
+    this.gameObject.x = this.position.x - this.offset.x;
+    this.gameObject.y = this.position.y - this.offset.y;
   }
 
   /**
