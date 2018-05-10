@@ -40,8 +40,8 @@ class Game extends Phaser.Scene {
     this.player.play('hero_face_down');
 
     this.physics.world.enable(zero);
-    this.physics.world.enable(one);
-    this.physics.world.enable(two);
+    //this.physics.world.enable(one);
+    //this.physics.world.enable(two);
     this.physics.world.enable(this.player);
     this.player.body.setOffset(4, 8);
 
@@ -57,19 +57,25 @@ class Game extends Phaser.Scene {
   }
 
   update(time, delta) {
-    let animDir = '';
     if (this.keys.down.isDown) {
-      animDir = 'down';
       this.player.body.setVelocityY(50);
     } else if (this.keys.left.isDown) {
-      animDir = 'left';
       this.player.body.setVelocityX(-50);
     } else if (this.keys.right.isDown) {
-      animDir = 'right';
       this.player.body.setVelocityX(50);
     } else if (this.keys.up.isDown) {
-      animDir = 'up';
       this.player.body.setVelocityY(-50);
+    }
+
+    let animDir = '';
+    if (this.player.body.velocity.y > 0) {
+      animDir = 'down';
+    } else if (this.player.body.velocity.x < 0) {
+      animDir = 'left';
+    } else if (this.player.body.velocity.x > 0) {
+      animDir = 'right';
+    } else if (this.player.body.velocity.y < 0) {
+      animDir = 'up';
     }
     const anim = `hero_walk_${animDir}`;
     if (anim !== this.player.anims.currentAnim.key) {
