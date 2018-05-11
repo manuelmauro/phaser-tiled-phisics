@@ -49,16 +49,6 @@ const CONST = {
      * @type {number}
      * @since 0.1.0
      */
-  FACING_UP: 11,
-
-  /**
-     * [description]
-     *
-     * @name
-     * @readOnly
-     * @type {number}
-     * @since 0.1.0
-     */
   FACING_DOWN: 12,
 
   /**
@@ -89,7 +79,7 @@ const CONST = {
      * @type {number}
      * @since 0.1.0
      */
-  UP: 11,
+  FACING_UP: 11,
 
   /**
      * [description]
@@ -99,7 +89,7 @@ const CONST = {
      * @type {number}
      * @since 0.1.0
      */
-  DOWN: 12,
+  DOWN: 0,
 
   /**
      * [description]
@@ -109,7 +99,7 @@ const CONST = {
      * @type {number}
      * @since 0.1.0
      */
-  LEFT: 13,
+  LEFT: 1,
 
   /**
      * [description]
@@ -119,7 +109,17 @@ const CONST = {
      * @type {number}
      * @since 0.1.0
      */
-  RIGHT: 14,
+  RIGHT: 2,
+
+  /**
+     * [description]
+     *
+     * @name
+     * @readOnly
+     * @type {number}
+     * @since 0.1.0
+     */
+  UP: 3,
 };
 
 module.exports = CONST;

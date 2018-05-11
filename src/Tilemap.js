@@ -14,6 +14,7 @@
  */
 
 import CONST from './const';
+import { adjacent } from './utils/tile/index';
 
 class Tilemap {
   constructor(world) {
@@ -42,7 +43,7 @@ class Tilemap {
      * @type
      * @since 0.1.0
      */
-    this.tilesets = new Phaser.Structs.Set();
+    this.tilesets = new Phaser.Structs.Map();
   }
 
   /**
@@ -58,30 +59,13 @@ class Tilemap {
    *
    */
   transition(object, tx, ty, dir) {
-    let tileFrom = this.layers.entries[0][ty][tx];
-    let tileTo;
-    switch (dir) {
-      case CONST.DOWN:
-        tileTo = this.layers.entries[0][ty][tx - 1];
-        break;
-      case CONST.LEFT:
-        tileTo = this.layers.entries[0][ty - 1][tx - 2];
-        break;
-      case CONST.RIGHT:
-        tileTo = this.layers.entries[0][ty - 1][tx];
-        break;
-      case CONST.UP:
-        tileTo = this.layers.entries[0][ty - 2][tx - 1];
-        break;
-      default:
-    }
-
-    const curTileset = this.tilesets.entries[0];
-    if (curTileset[tileTo.index - 1]) {
-      if (curTileset[tileTo.index - 1].collide) {
-        object.velocity.x = 0;
-        object.velocity.y = 0;
-      }
+    const tileFromId = this.layers.entries[0][ty][tx];
+    const tileTo = adjacent(tx, ty, dir);
+    const tileToId = this.layers.entries[0][tileTo.tx][tileTo.ty];
+    const tileToProps = this.tilesets.get(tileToId);
+    if (tileToProps && tileToProps.collide) {
+      object.velocity.x = 0;
+      object.velocity.y = 0;
     }
   }
 }

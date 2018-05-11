@@ -32,16 +32,17 @@ class Game extends Phaser.Scene {
 
     const zero = map.createStaticLayer('zero', tiles, 0, 0);
     const one = map.createStaticLayer('one', tiles, 0, 0);
-    const two = map.createStaticLayer('two', tiles, 0, 0);
 
     makeAnimations(this);
 
-    this.player = this.add.sprite(45, 49);
+    this.player = this.add.sprite(8, 8);
     this.player.play('hero_face_down');
 
+    const two = map.createStaticLayer('two', tiles, 0, 0);
+
     this.physics.world.enable(zero);
-    //this.physics.world.enable(one);
-    //this.physics.world.enable(two);
+    this.physics.world.enable(one);
+    this.physics.world.enable(two);
     this.physics.world.enable(this.player);
     this.player.body.setOffset(4, 8);
 

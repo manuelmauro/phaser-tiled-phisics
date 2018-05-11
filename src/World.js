@@ -89,14 +89,35 @@ export default class World {
    *
    */
   enable(object) {
+    let layer = {};
+    let fst = {};
+    let props = {};
+    let key = -1;
+
     switch (object.type) {
       case 'Sprite':
+        // give a physical body to the sprite
         object.body = new Body(this, object);
         this.bodies.set(object.body);
         break;
       case 'StaticTilemapLayer':
-        this.tilemap.layers.set(object.layer.data);
-        this.tilemap.tilesets.set(object.tileset.tileProperties);
+        // layer data
+        layer = [];
+        for (let x = 0; x < object.layer.width; x += 1) {
+          layer[x] = [];
+          for (let y = 0; y < object.layer.height; y += 1) {
+            layer[x][y] = object.layer.data[y][x].index;
+          }
+        }
+        this.tilemap.layers.set(layer);
+
+        // tiles' properties
+        props = Object.keys(object.tileset.tileProperties);
+        for (let p in props) {
+          fst = object.tileset.firstgid;
+          key = Number(props[p]) + Number(fst);
+          this.tilemap.tilesets.set(key, object.tileset.tileProperties[props[p]]);
+        }
         break;
       default:
     }

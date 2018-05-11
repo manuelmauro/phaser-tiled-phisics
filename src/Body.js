@@ -4,6 +4,7 @@
  * @license
  */
 
+import { direction } from './utils/tile/index';
 import CONST from './const';
 
 class Body {
@@ -160,7 +161,6 @@ class Body {
    * @method Physics.Tiled.Body#update
    * @since 0.1.0
    *
-   * @param {number} time - [description]
    * @param {number} delta - [description]
    *
    */
@@ -168,16 +168,9 @@ class Body {
     // the body is not moving, nothing to update
     if (!this.velocity.x && !this.velocity.y) { return; }
 
-    // compute the behavior of the next tile the body is moving on
-    if (this.velocity.x > 0) {
-      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.RIGHT);
-    } else if (this.velocity.x < 0) {
-      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.LEFT);
-    } else if (this.velocity.y > 0) {
-      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.DOWN);
-    } else if (this.velocity.y < 0) {
-      this.world.tilemap.transition(this, this.tile.x, this.tile.y, CONST.UP);
-    }
+    // compute the behavior of the body moving between two tiles
+    const dir = direction(this.velocity.x, this.velocity.y);
+    this.world.tilemap.transition(this, this.tile.x, this.tile.y, dir);
 
     // x axis
     const next = { };
@@ -227,8 +220,8 @@ class Body {
    *
    */
   postUpdate() {
-    this.gameObject.x = this.position.x - this.offset.x;
-    this.gameObject.y = this.position.y - this.offset.y;
+    this.gameObject.x = (this.position.x + (this.gameObject.width / 2)) - this.offset.x;
+    this.gameObject.y = (this.position.y + (this.gameObject.height / 2)) - this.offset.y;
   }
 
   /**
