@@ -116,7 +116,7 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.facing = CONST.FACING_NONE;
+    this.facing = CONST.DOWN;
 
     /**
      * [description]
@@ -139,15 +139,6 @@ class Body {
     /**
      * [description]
      *
-     * @name Physics.Tiled.Body#locked
-     * @type
-     * @since 0.1.0
-     */
-    this.locked = new Phaser.Math.Vector2();
-
-    /**
-     * [description]
-     *
      * @name Physics.Tiled.Body#collideWorldBounds
      * @type
      * @since 0.1.0
@@ -165,12 +156,11 @@ class Body {
    *
    */
   update(delta) {
-    // the body is not moving, nothing to update
-    if (!this.velocity.x && !this.velocity.y) { return; }
-
     // compute the behavior of the body moving between two tiles
-    const dir = direction(this.velocity.x, this.velocity.y);
-    this.world.tilemap.transition(this, this.tile.x, this.tile.y, dir);
+    if (this.velocity.x !== 0 || this.velocity.y !== 0) {
+      this.facing = direction(this.velocity.x, this.velocity.y);
+    }
+    this.world.tilemap.transition(this, this.tile.x, this.tile.y, this.facing);
 
     // x axis
     const next = { };
@@ -182,11 +172,13 @@ class Body {
       this.tile.x = Math.floor(next.x / twidth);
       this.position.x = this.tile.x * twidth;
       this.velocity.x = 0;
+      this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
       this.tile.x = Math.ceil(next.x / twidth);
       this.position.x = this.tile.x * twidth;
       this.velocity.x = 0;
+      this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else {
       // the body is moving between two tiles
       this.position.x = next.x;
@@ -201,11 +193,13 @@ class Body {
       this.tile.y = Math.floor(next.y / theight);
       this.position.y = this.tile.y * theight;
       this.velocity.y = 0;
+      this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
       this.tile.y = Math.ceil(next.y / theight);
       this.position.y = this.tile.y * theight;
       this.velocity.y = 0;
+      this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else {
       // the body is moving between two tiles
       this.position.y = next.y;
@@ -257,6 +251,8 @@ class Body {
    *
    */
   setSize(width, height) {
+    this.width = width;
+    this.height = height;
     return this;
   }
 
@@ -273,6 +269,8 @@ class Body {
    * @param {number} y - The vertical position to place the Game Object and Body.
    */
   reset(x, y) {
+    this.position.x = x;
+    this.position.y = y;
     this.stop();
   }
 
@@ -285,6 +283,9 @@ class Body {
    * @return {Physics.Tiled.Body} This Body object.
    */
   stop() {
+    this.velocity.x = 0;
+    this.velocity.y = 0;
+    this.snapToGrid();
     return this;
   }
 
@@ -296,7 +297,6 @@ class Body {
    */
   destroy() {
     this.enable = false;
-
     this.world.pendingDestroy.set(this);
   }
 
@@ -354,7 +354,6 @@ class Body {
    */
   setMass(value) {
     this.mass = value;
-
     return this;
   }
 
@@ -370,7 +369,6 @@ class Body {
    */
   setImmovable(value) {
     this.immovable = value;
-
     return this;
   }
 
@@ -384,7 +382,6 @@ class Body {
   snapToGrid() {
     this.tile.x = Math.round(this.gameObject.x / this.world.tilesize.x);
     this.tile.y = Math.round(this.gameObject.y / this.world.tilesize.y);
-
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
   }

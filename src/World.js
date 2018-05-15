@@ -5,7 +5,7 @@
  */
 
 import Body from './Body';
-import Tilemap from './Tilemap';
+import Tilemap from './tilemap/Tilemap';
 import CONST from './const';
 
 export default class World {
@@ -133,7 +133,7 @@ export default class World {
    *
    */
   disable(object) {
-
+    object.enable = false;
   }
 
   /**

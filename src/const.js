@@ -39,56 +39,6 @@ const CONST = {
      * @type {number}
      * @since 0.1.0
      */
-  FACING_NONE: 10,
-
-  /**
-     * [description]
-     *
-     * @name
-     * @readOnly
-     * @type {number}
-     * @since 0.1.0
-     */
-  FACING_DOWN: 12,
-
-  /**
-     * [description]
-     *
-     * @name
-     * @readOnly
-     * @type {number}
-     * @since 0.1.0
-     */
-  FACING_LEFT: 13,
-
-  /**
-     * [description]
-     *
-     * @name
-     * @readOnly
-     * @type {number}
-     * @since 0.1.0
-     */
-  FACING_RIGHT: 14,
-
-  /**
-     * [description]
-     *
-     * @name
-     * @readOnly
-     * @type {number}
-     * @since 0.1.0
-     */
-  FACING_UP: 11,
-
-  /**
-     * [description]
-     *
-     * @name
-     * @readOnly
-     * @type {number}
-     * @since 0.1.0
-     */
   DOWN: 0,
 
   /**
