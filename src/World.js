@@ -63,20 +63,6 @@ export default class World {
      * @since 0.1.0
      */
     this.colliders = new Phaser.Structs.ProcessQueue();
-
-    /**
-     * [description]
-     *
-     * @name
-     * @type
-     * @since 0.1.0
-     */
-    this.checkCollision = {
-      up: true,
-      down: true,
-      left: true,
-      right: true,
-    };
   }
 
   /**
@@ -147,62 +133,6 @@ export default class World {
    * @param
    * @param
    * @param
-   * @param
-   * @param
-   * @param
-   *
-   * @return
-   *
-   */
-  setBounds(x, y, width, height, checkLeft, checkRight, checkUp, checkDown) {
-    this.bounds.setTo(x, y, width, height);
-
-    if (checkLeft !== undefined) {
-      this.setBoundsCollision(checkLeft, checkRight, checkUp, checkDown);
-    }
-
-    return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param
-   * @param
-   * @param
-   * @param
-   *
-   * @return
-   *
-   */
-  setBoundsCollision(left, right, up, down) {
-    if (left === undefined) { left = true; }
-    if (right === undefined) { right = true; }
-    if (up === undefined) { up = true; }
-    if (down === undefined) { down = true; }
-
-    this.checkCollision.left = left;
-    this.checkCollision.right = right;
-    this.checkCollision.up = up;
-    this.checkCollision.down = down;
-
-    return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param
-   * @param
-   * @param
-   * @param
-   * @param
    *
    */
   addCollider(object1, object2, collideCallback, processCallback, callbackContext) {
@@ -222,7 +152,6 @@ export default class World {
    */
   removeCollider(collider) {
     this.colliders.remove(collider);
-
     return this;
   }
 

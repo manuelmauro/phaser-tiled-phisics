@@ -20,7 +20,7 @@ class TiledPhysics {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#
+     * @name Phaser.Physics.Tiled.TiledPhysics#scene
      * @type {Phaser.Scene}
      * @since 0.1.0
      */
@@ -30,7 +30,7 @@ class TiledPhysics {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#
+     * @name Phaser.Physics.Tiled.TiledPhysics#world
      * @type
      * @since 0.1.0
      */
@@ -39,7 +39,7 @@ class TiledPhysics {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#
+     * @name Phaser.Physics.Tiled.TiledPhysics#systems
      * @type
      * @since 0.1.0
      */
@@ -73,8 +73,9 @@ class TiledPhysics {
    * @private
    * @since 0.1.0
    */
-  shutdown() {}
+  shutdown() {
 
+  }
 
   /**
    *
@@ -84,9 +85,7 @@ class TiledPhysics {
    */
   destroy() {
     this.shutdown();
-
     this.scene.sys.events.off('start', this.start, this);
-
     this.scene = undefined;
   }
 }

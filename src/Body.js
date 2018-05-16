@@ -127,14 +127,16 @@ class Body {
    *
    */
   update(delta) {
-    // compute the behavior of the body moving between two tiles
+    // facing direction
     if (this.velocity.x !== 0 || this.velocity.y !== 0) {
       this.facing = direction(this.velocity.x, this.velocity.y);
     }
+
+    // compute the behavior of the body moving between two tiles
     this.world.tilemap.transition(this, this.tile.x, this.tile.y, this.facing);
 
-    // x axis
     const next = { };
+    // x axis
     next.x = this.position.x + (this.velocity.x * (delta / 1000));
     const twidth = this.world.tilesize.x;
 

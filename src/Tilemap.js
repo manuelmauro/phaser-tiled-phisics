@@ -74,10 +74,12 @@ class Tilemap {
    *
    */
   on(object, tx, ty) {
+    // convenient tile object
     const tile = { tx, ty };
     tile.id = this.layers.entries[0][tile.tx][tile.ty];
     tile.props = this.tilesets.get(tile.id);
 
+    // compute modifiers
     object.modifiers.each((modifier) => { modifier.on(object, tile); });
   }
 }
