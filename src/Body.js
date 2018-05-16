@@ -6,6 +6,10 @@
 
 import { direction } from './utils/tile/index';
 import CONST from './const';
+// modifiers
+import SimpleCollision from './modifiers/SimpleCollision';
+import Collision from './modifiers/Collision';
+import Force from './modifiers/Force';
 
 class Body {
   constructor(world, gameObject) {
@@ -26,6 +30,18 @@ class Body {
      * @since 0.1.0
      */
     this.gameObject = gameObject;
+
+    /**
+     * [description]
+     *
+     * @name
+     * @type
+     * @since 0.1.0
+     */
+    this.modifiers = new Phaser.Structs.Set();
+    this.modifiers.set(new SimpleCollision(this));
+    this.modifiers.set(new Collision(this));
+    this.modifiers.set(new Force(this));
 
     /**
      * [description]
@@ -94,56 +110,11 @@ class Body {
     /**
      * [description]
      *
-     * @name Physics.Tiled.Body#mass
-     * @type
-     * @since 0.1.0
-     */
-    this.mass = 1;
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#strength
-     * @type
-     * @since 0.1.0
-     */
-    this.strength = -1;
-
-    /**
-     * [description]
-     *
      * @name Physics.Tiled.Body#facing
      * @type
      * @since 0.1.0
      */
     this.facing = CONST.DOWN;
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#immovable
-     * @type
-     * @since 0.1.0
-     */
-    this.immovable = false;
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#collide
-     * @type
-     * @since 0.1.0
-     */
-    this.collidable = true;
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#collideWorldBounds
-     * @type
-     * @since 0.1.0
-     */
-    this.collideWorldBounds = false;
   }
 
   /**
@@ -336,36 +307,6 @@ class Body {
     this.velocity.x = 0;
     this.velocity.y = value;
 
-    return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param {number} value - [description]
-   *
-   * @return This Body object.
-   */
-  setMass(value) {
-    this.mass = value;
-    return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param {boolean} value - [description]
-   *
-   * @return This Body object.
-   */
-  setImmovable(value) {
-    this.immovable = value;
     return this;
   }
 

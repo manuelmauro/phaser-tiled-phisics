@@ -4,11 +4,7 @@
  * @license
  */
 
-import { adjacent } from '../utils/tile/index';
-// modifiers
-import SimpleCollision from './modifiers/SimpleCollision';
-import Collision from './modifiers/Collision';
-import Force from './modifiers/Force';
+import { adjacent } from './utils/tile/index';
 
 class Tilemap {
   constructor(world) {
@@ -38,18 +34,6 @@ class Tilemap {
      * @since 0.1.0
      */
     this.tilesets = new Phaser.Structs.Map();
-
-    /**
-     * [description]
-     *
-     * @name
-     * @type
-     * @since 0.1.0
-     */
-    this.modifiers = new Phaser.Structs.Set();
-    this.modifiers.set(new SimpleCollision(this));
-    this.modifiers.set(new Collision(this));
-    this.modifiers.set(new Force(this));
   }
 
   /**
@@ -65,14 +49,17 @@ class Tilemap {
    *
    */
   transition(object, tx, ty, dir) {
+    // convenient tile object
     const tileFrom = { tx, ty };
     tileFrom.id = this.layers.entries[0][tx][ty];
     tileFrom.props = this.tilesets.get(tileFrom.id) || {};
+    // convenient tile object
     const tileTo = adjacent(tx, ty, dir);
     tileTo.id = this.layers.entries[0][tileTo.tx][tileTo.ty];
     tileTo.props = this.tilesets.get(tileTo.id) || {};
 
-    this.modifiers.each((modifier) => { modifier.transition(object, tileFrom, tileTo); });
+    // compute modifiers
+    object.modifiers.each((modifier) => { modifier.transition(object, tileFrom, tileTo); });
   }
 
   /**
@@ -91,7 +78,7 @@ class Tilemap {
     tile.id = this.layers.entries[0][tile.tx][tile.ty];
     tile.props = this.tilesets.get(tile.id);
 
-    this.modifiers.each((modifier) => { modifier.on(object, tile); });
+    object.modifiers.each((modifier) => { modifier.on(object, tile); });
   }
 }
 export default Tilemap;

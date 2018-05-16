@@ -7,8 +7,8 @@
 /**
  * @typedef {object} Tile
  *
- * @property {boolean} [forceDirection] - [description]
- * @property {boolean} [forceIntensity] - [description]
+ * @property {int} [forceDirection] - [description]
+ * @property {float} [forceIntensity] - [description]
  *
  */
 class Force {

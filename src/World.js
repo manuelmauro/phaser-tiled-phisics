@@ -5,7 +5,7 @@
  */
 
 import Body from './Body';
-import Tilemap from './tilemap/Tilemap';
+import Tilemap from './Tilemap';
 import CONST from './const';
 
 export default class World {
