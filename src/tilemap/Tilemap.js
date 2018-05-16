@@ -6,6 +6,7 @@
 
 import { adjacent } from '../utils/tile/index';
 // modifiers
+import SimpleCollision from './modifiers/SimpleCollision';
 import Collision from './modifiers/Collision';
 import Force from './modifiers/Force';
 
@@ -46,6 +47,7 @@ class Tilemap {
      * @since 0.1.0
      */
     this.modifiers = new Phaser.Structs.Set();
+    this.modifiers.set(new SimpleCollision(this));
     this.modifiers.set(new Collision(this));
     this.modifiers.set(new Force(this));
   }
@@ -64,7 +66,8 @@ class Tilemap {
    */
   transition(object, tx, ty, dir) {
     const tileFrom = { tx, ty };
-    tileFrom.id = this.layers.entries[0][ty][tx];
+    tileFrom.id = this.layers.entries[0][tx][ty];
+    tileFrom.props = this.tilesets.get(tileFrom.id) || {};
     const tileTo = adjacent(tx, ty, dir);
     tileTo.id = this.layers.entries[0][tileTo.tx][tileTo.ty];
     tileTo.props = this.tilesets.get(tileTo.id) || {};

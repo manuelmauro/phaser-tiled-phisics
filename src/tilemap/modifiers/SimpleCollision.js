@@ -7,11 +7,10 @@
 /**
  * @typedef {object} Tile
  *
- * @property {boolean} [forceDirection] - [description]
- * @property {boolean} [forceIntensity] - [description]
+ * @property {boolean} [collide] - [description]
  *
  */
-class Force {
+class SimpleCollision {
   constructor(tilemap) {
     /**
      * [description]
@@ -35,6 +34,12 @@ class Force {
    *
    */
   transition(object, tileFrom, tileTo) {
+    if (tileTo.props && tileTo.props.collide) {
+      object.velocity.x = 0;
+      object.velocity.y = 0;
+      object.tile.x = tileFrom.tx;
+      object.tile.y = tileFrom.ty;
+    }
   }
 
   /**
@@ -48,11 +53,7 @@ class Force {
    *
    */
   on(object, tile) {
-    if (tile.props && tile.props.force) {
-      object.velocity.x = 200;
-      object.velocity.y = 0;
-    }
   }
 }
 
-export default Force;
+export default SimpleCollision;

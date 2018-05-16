@@ -231,10 +231,7 @@ class Body {
    *
    */
   setOffset(x, y) {
-    if (y === undefined) { y = x; }
-
     this.offset.set(x, y);
-
     return this;
   }
 
@@ -380,8 +377,8 @@ class Body {
    *
    */
   snapToGrid() {
-    this.tile.x = Math.round(this.gameObject.x / this.world.tilesize.x);
-    this.tile.y = Math.round(this.gameObject.y / this.world.tilesize.y);
+    this.tile.x = Math.floor(this.gameObject.x / this.world.tilesize.x);
+    this.tile.y = Math.floor(this.gameObject.y / this.world.tilesize.y);
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
   }
