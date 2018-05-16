@@ -48,9 +48,22 @@ class Force {
    *
    */
   on(object, tile) {
-    if (tile.props && tile.props.force) {
-      object.velocity.x = 200;
-      object.velocity.y = 0;
+    if (tile.props) {
+      switch (tile.props.forceDirection) {
+        case 0:
+          object.setVelocityY(tile.props.forceIntensity);
+          break;
+        case 1:
+          object.setVelocityX(-tile.props.forceIntensity);
+          break;
+        case 2:
+          object.setVelocityX(tile.props.forceIntensity);
+          break;
+        case 3:
+          object.setVelocityY(-tile.props.forceIntensity);
+          break;
+        default:
+      }
     }
   }
 }
