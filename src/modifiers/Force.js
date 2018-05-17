@@ -51,16 +51,16 @@ class Force {
     if (tile.props) {
       switch (tile.props.forceDirection) {
         case 0:
-          object.setVelocityY(tile.props.forceIntensity);
+          object.acceleration.y = tile.props.forceIntensity;
           break;
         case 1:
-          object.setVelocityX(-tile.props.forceIntensity);
+          object.acceleration.x = -tile.props.forceIntensity;
           break;
         case 2:
-          object.setVelocityX(tile.props.forceIntensity);
+          object.acceleration.x = tile.props.forceIntensity;
           break;
         case 3:
-          object.setVelocityY(-tile.props.forceIntensity);
+          object.acceleration.y = -tile.props.forceIntensity;
           break;
         default:
       }
