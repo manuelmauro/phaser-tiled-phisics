@@ -9,6 +9,7 @@ const config = {
   scaleMode: 0, // Phaser.ScaleManager.EXACT_FIT,
   pixelArt: true,
   zoom: 4,
+  antialias: false,
   physics: {
     tiled: {
       debug: true,
