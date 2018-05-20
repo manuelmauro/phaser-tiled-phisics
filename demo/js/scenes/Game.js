@@ -40,11 +40,19 @@ class Game extends Phaser.Scene {
 
     const two = map.createStaticLayer('two', tiles, 0, 0);
 
-    this.physics.world.enable(zero);
-    this.physics.world.enable(one);
+    const layerZero = this.physics.world.enable(zero);
+    const layerOne = this.physics.world.enable(one);
     this.physics.world.enable(two);
-    this.physics.world.enable(this.player);
+
+    const player = this.physics.world.enable(this.player);
     this.player.body.setOffset(4, 8);
+
+    this.physics.world.tilemap.addSimpleCollision(player, layerZero);
+    this.physics.world.tilemap.addSimpleCollision(player, layerOne);
+
+    this.physics.world.tilemap.addCollision(player, layerOne);
+
+    this.physics.world.tilemap.addForce(player, layerOne);
 
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);

@@ -11,7 +11,7 @@
  *
  */
 class SimpleCollision {
-  constructor(tilemap) {
+  constructor(body, layer) {
     /**
      * [description]
      *
@@ -19,7 +19,16 @@ class SimpleCollision {
      * @type
      * @since 0.1.0
      */
-    this.tilemap = tilemap;
+    this.body = body;
+
+    /**
+     * [description]
+     *
+     * @name
+     * @type
+     * @since 0.1.0
+     */
+    this.layer = layer;
   }
 
   /**
@@ -28,17 +37,19 @@ class SimpleCollision {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
    * @param tileFrom - [description]
    * @param tileTo - [description]
    *
    */
-  transition(object, tileFrom, tileTo) {
-    if (tileTo.props && tileTo.props.collide) {
-      object.velocity.x = 0;
-      object.velocity.y = 0;
-      object.tile.x = tileFrom.tx;
-      object.tile.y = tileFrom.ty;
+  transition(tileFrom, tileTo) {
+    const id = this.layer.data[tileTo.tx][tileTo.ty];
+    const props = this.layer.tileset.get(id) || {};
+
+    if (props.collide) {
+      this.body.velocity.x = 0;
+      this.body.velocity.y = 0;
+      this.body.tile.x = tileFrom.tx;
+      this.body.tile.y = tileFrom.ty;
     }
   }
 
@@ -48,11 +59,10 @@ class SimpleCollision {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
    * @param tile - [description]
    *
    */
-  on(object, tile) {
+  on(tile) {
   }
 }
 

@@ -34,18 +34,6 @@ class Body {
     /**
      * [description]
      *
-     * @name
-     * @type
-     * @since 0.1.0
-     */
-    this.modifiers = new Phaser.Structs.Set();
-    this.modifiers.set(new SimpleCollision(this));
-    this.modifiers.set(new Collision(this));
-    this.modifiers.set(new Force(this));
-
-    /**
-     * [description]
-     *
      * @name Physics.Tiled.Body#enable
      * @type
      * @since 0.1.0
@@ -133,6 +121,16 @@ class Body {
      * @since 0.1.0
      */
     this.facing = CONST.DOWN;
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#dirty
+     * @type {boolean}
+     * @default false
+     * @since 0.1.0
+     */
+    this.dirty = false;
   }
 
   /**
@@ -145,6 +143,8 @@ class Body {
    *
    */
   update(delta) {
+    this.dirty = true;
+
     // facing direction
     if (this.velocity.x !== 0 || this.velocity.y !== 0) {
       this.facing = direction(this.velocity.x, this.velocity.y);
@@ -154,13 +154,15 @@ class Body {
     this.world.tilemap.transition(this, this.tile.x, this.tile.y, this.facing);
 
     const next = { };
-    // x axis
     next.x = this.position.x
-          + (this.velocity.x * (delta / 1000))
-          + ((1 / 2) * this.acceleration.x * ((delta / 1000) ** 2));
+           + (this.velocity.x * (delta / 1000))
+           + ((1 / 2) * this.acceleration.x * ((delta / 1000) ** 2));
+    next.y = this.position.y
+           + (this.velocity.y * (delta / 1000))
+           + ((1 / 2) * this.acceleration.y * ((delta / 1000) ** 2));
 
+    // x axis
     const twidth = this.world.tilesize.x;
-
     if (Math.floor(next.x / twidth) > Math.floor(this.position.x / twidth)) {
       // the body moved one tile right
       this.tile.x = Math.floor(next.x / twidth);
@@ -181,12 +183,7 @@ class Body {
     }
 
     // y axis
-    next.y = this.position.y
-          + (this.velocity.y * (delta / 1000))
-          + ((1 / 2) * this.acceleration.y * ((delta / 1000) ** 2));
-
     const theight = this.world.tilesize.x;
-
     if (Math.floor(next.y / theight) > Math.floor(this.position.y / theight)) {
       // the body moved one tile down
       this.tile.y = Math.floor(next.y / theight);
@@ -215,6 +212,13 @@ class Body {
    *
    */
   postUpdate() {
+    //  Only allow postUpdate to be called once per frame
+    if (!this.enable || !this.dirty) {
+      return;
+    }
+
+    this.dirty = false;
+
     this.gameObject.x = (this.position.x + (this.gameObject.width / 2)) - this.offset.x;
     this.gameObject.y = (this.position.y + (this.gameObject.height / 2)) - this.offset.y;
   }

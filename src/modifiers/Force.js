@@ -12,7 +12,7 @@
  *
  */
 class Force {
-  constructor(tilemap) {
+  constructor(body, layer) {
     /**
      * [description]
      *
@@ -20,7 +20,16 @@ class Force {
      * @type
      * @since 0.1.0
      */
-    this.tilemap = tilemap;
+    this.body = body;
+
+    /**
+     * [description]
+     *
+     * @name
+     * @type
+     * @since 0.1.0
+     */
+    this.layer = layer;
   }
 
   /**
@@ -29,12 +38,11 @@ class Force {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
    * @param tileFrom - [description]
    * @param tileTo - [description]
    *
    */
-  transition(object, tileFrom, tileTo) {
+  transition(tileFrom, tileTo) {
   }
 
   /**
@@ -43,24 +51,26 @@ class Force {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
    * @param tile - [description]
    *
    */
-  on(object, tile) {
-    if (tile.props) {
-      switch (tile.props.forceDirection) {
+  on(tile) {
+    const id = this.layer.data[tile.tx][tile.ty];
+    const props = this.layer.tileset.get(id) || {};
+
+    if (props) {
+      switch (props.forceDirection) {
         case 0:
-          object.acceleration.y = tile.props.forceIntensity;
+          this.body.acceleration.y = props.forceIntensity;
           break;
         case 1:
-          object.acceleration.x = -tile.props.forceIntensity;
+          this.body.acceleration.x = -props.forceIntensity;
           break;
         case 2:
-          object.acceleration.x = tile.props.forceIntensity;
+          this.body.acceleration.x = props.forceIntensity;
           break;
         case 3:
-          object.acceleration.y = -tile.props.forceIntensity;
+          this.body.acceleration.y = -props.forceIntensity;
           break;
         default:
       }

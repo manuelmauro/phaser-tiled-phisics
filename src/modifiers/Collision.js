@@ -19,7 +19,7 @@
  *
  */
 class Collision {
-  constructor(tilemap) {
+  constructor(body, layer) {
     /**
      * [description]
      *
@@ -27,7 +27,16 @@ class Collision {
      * @type
      * @since 0.1.0
      */
-    this.tilemap = tilemap;
+    this.body = body;
+
+    /**
+     * [description]
+     *
+     * @name
+     * @type
+     * @since 0.1.0
+     */
+    this.layer = layer;
   }
 
   /**
@@ -36,38 +45,36 @@ class Collision {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
    * @param tileFrom - [description]
    * @param tileTo - [description]
    *
    */
-  transition(object, tileFrom, tileTo) {
-    if (!tileFrom.props) { tileFrom.props = {}; };
-    if (!tileTo.props) { tileTo.props = {}; };
+  transition(tileFrom, tileTo) {
+    const tileFromId = this.layer.data[tileFrom.tx][tileFrom.ty];
+    const tileFromProps = this.layer.tileset.get(tileFromId) || {};
+
+    const tileToId = this.layer.data[tileTo.tx][tileTo.ty];
+    const tileToProps = this.layer.tileset.get(tileToId) || {};
 
     if (tileFrom.ty === tileTo.ty - 1) {
       // move down
-      if (tileFrom.props.inCollideDown || tileTo.props.outCollideUp) {
-        object.velocity.x = 0;
-        object.velocity.y = 0;
+      if (tileFromProps.inCollideDown || tileToProps.outCollideUp) {
+        this.body.velocity.set(0, 0);
       }
     } else if (tileFrom.tx === tileTo.tx + 1) {
       // move left
-      if (tileFrom.props.inCollideLeft || tileTo.props.outCollideRight) {
-        object.velocity.x = 0;
-        object.velocity.y = 0;
+      if (tileFromProps.inCollideLeft || tileToProps.outCollideRight) {
+        this.body.velocity.set(0, 0);
       }
     } else if (tileFrom.tx === tileTo.tx - 1) {
       // move right
-      if (tileFrom.props.inCollideRight || tileTo.props.outCollideLeft) {
-        object.velocity.x = 0;
-        object.velocity.y = 0;
+      if (tileFromProps.inCollideRight || tileToProps.outCollideLeft) {
+        this.body.velocity.set(0, 0);
       }
     } else if (tileFrom.ty === tileTo.ty + 1) {
       // move up
-      if (tileFrom.props.inCollideUp || tileTo.props.outCollideDown) {
-        object.velocity.x = 0;
-        object.velocity.y = 0;
+      if (tileFromProps.inCollideUp || tileToProps.outCollideDown) {
+        this.body.velocity.set(0, 0);
       }
     }
   }
@@ -78,11 +85,10 @@ class Collision {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
    * @param tile - [description]
    *
    */
-  on(object, tile) {
+  on(tile) {
   }
 }
 

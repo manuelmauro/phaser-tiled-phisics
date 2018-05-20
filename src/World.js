@@ -6,6 +6,7 @@
 
 import Body from './Body';
 import Tilemap from './Tilemap';
+import Layer from './Layer';
 import CONST from './const';
 
 export default class World {
@@ -75,7 +76,7 @@ export default class World {
    *
    */
   enable(object) {
-    let layer = {};
+    const layer = new Layer(this.tilemap);
     let fst = {};
     let props = {};
     let key = -1;
@@ -85,26 +86,25 @@ export default class World {
         // give a physical body to the sprite
         object.body = new Body(this, object);
         this.bodies.set(object.body);
-        break;
+        return object.body;
       case 'StaticTilemapLayer':
         // layer data
-        layer = [];
+        layer.data = [];
         for (let x = 0; x < object.layer.width; x += 1) {
-          layer[x] = [];
+          layer.data[x] = [];
           for (let y = 0; y < object.layer.height; y += 1) {
-            layer[x][y] = object.layer.data[y][x].index;
+            layer.data[x][y] = object.layer.data[y][x].index;
           }
         }
-        this.tilemap.layers.set(layer);
-
         // tiles' properties
         props = Object.keys(object.tileset.tileProperties);
         for (let p in props) {
           fst = object.tileset.firstgid;
           key = Number(props[p]) + Number(fst);
-          this.tilemap.tilesets.set(key, object.tileset.tileProperties[props[p]]);
+          layer.tileset.set(key, object.tileset.tileProperties[props[p]]);
         }
-        break;
+        this.tilemap.layers.set(layer);
+        return layer;
       default:
     }
   }
@@ -166,6 +166,8 @@ export default class World {
    *
    */
   update(time, delta) {
+    if (this.bodies.size === 0) { return; }
+
     this.bodies.each((body) => { if (body.enable) body.update(delta); });
   }
 

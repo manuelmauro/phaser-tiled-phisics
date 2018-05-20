@@ -5,6 +5,10 @@
  */
 
 import { adjacent } from './utils/tile/index';
+// modifiers
+import SimpleCollision from './modifiers/SimpleCollision';
+import Collision from './modifiers/Collision';
+import Force from './modifiers/Force';
 
 class Tilemap {
   constructor(world) {
@@ -33,7 +37,59 @@ class Tilemap {
      * @type
      * @since 0.1.0
      */
-    this.tilesets = new Phaser.Structs.Map();
+    this.modifiers = new Phaser.Structs.ProcessQueue();
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param modifier - [description]
+   *
+   */
+  addModifier(modifier) {
+    this.modifiers.add(modifier);
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param modifier - [description]
+   *
+   */
+  addSimpleCollision(body, layer) {
+    this.modifiers.add(new SimpleCollision(body, layer));
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param modifier - [description]
+   *
+   */
+  addCollision(body, layer) {
+    this.modifiers.add(new Collision(body, layer));
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param modifier - [description]
+   *
+   */
+  addForce(body, layer) {
+    this.modifiers.add(new Force(body, layer));
   }
 
   /**
@@ -49,17 +105,13 @@ class Tilemap {
    *
    */
   transition(object, tx, ty, dir) {
-    // convenient tile object
     const tileFrom = { tx, ty };
-    tileFrom.id = this.layers.entries[0][tx][ty];
-    tileFrom.props = this.tilesets.get(tileFrom.id) || {};
-    // convenient tile object
     const tileTo = adjacent(tx, ty, dir);
-    tileTo.id = this.layers.entries[0][tileTo.tx][tileTo.ty];
-    tileTo.props = this.tilesets.get(tileTo.id) || {};
 
     // compute modifiers
-    object.modifiers.each((modifier) => { modifier.transition(object, tileFrom, tileTo); });
+    this.modifiers.update().forEach((modifier) => {
+      if (modifier.body === object) modifier.transition(tileFrom, tileTo);
+    });
   }
 
   /**
@@ -74,13 +126,12 @@ class Tilemap {
    *
    */
   on(object, tx, ty) {
-    // convenient tile object
     const tile = { tx, ty };
-    tile.id = this.layers.entries[0][tile.tx][tile.ty];
-    tile.props = this.tilesets.get(tile.id);
 
     // compute modifiers
-    object.modifiers.each((modifier) => { modifier.on(object, tile); });
+    this.modifiers.update().forEach((modifier) => {
+      if (modifier.body === object) modifier.on(tile);
+    });
   }
 }
 export default Tilemap;
