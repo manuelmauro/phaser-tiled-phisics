@@ -6,10 +6,6 @@
 
 import { direction } from './utils/tile/index';
 import CONST from './const';
-// modifiers
-import SimpleCollision from './modifiers/SimpleCollision';
-import Collision from './modifiers/Collision';
-import Force from './modifiers/Force';
 
 class Body {
   constructor(world, gameObject) {
