@@ -61,19 +61,6 @@ class Tilemap {
    * @param modifier - [description]
    *
    */
-  addSimpleCollision(body, layer) {
-    this.modifiers.add(new SimpleCollision(body, layer));
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param modifier - [description]
-   *
-   */
   addCollision(body, layer) {
     this.modifiers.add(new Collision(body, layer));
   }
