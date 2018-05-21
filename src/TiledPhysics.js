@@ -34,7 +34,7 @@ class TiledPhysics {
      * @type
      * @since 0.1.0
      */
-    this.world = new World();
+    this.world = undefined;
 
     /**
      * [description]
@@ -57,7 +57,9 @@ class TiledPhysics {
    * @since 0.1.0
    */
   boot() {
-    this.world = new World();
+    if (!this.world) {
+      this.world = new World(this.scene, this.config);
+    }
 
     const eventEmitter = this.systems.events;
 
