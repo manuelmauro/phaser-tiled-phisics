@@ -32,7 +32,6 @@ class Game extends Phaser.Scene {
 
     const zero = map.createStaticLayer('zero', tiles, 0, 0);
     const one = map.createStaticLayer('one', tiles, 0, 0);
-
     makeAnimations(this);
 
     this.player = this.add.sprite(8, 8);
@@ -50,9 +49,9 @@ class Game extends Phaser.Scene {
     this.player.body.setOffset(4, 8);
 
     // add modifiers
-    this.physics.world.tilemap.addSimpleCollision(player, layerZero);
-    this.physics.world.tilemap.addSimpleCollision(player, layerOne);
+    this.physics.world.tilemap.addCollision(player, layerZero);
     this.physics.world.tilemap.addCollision(player, layerOne);
+    this.physics.world.tilemap.addForce(player, layerZero);
     this.physics.world.tilemap.addForce(player, layerOne);
 
     // camera

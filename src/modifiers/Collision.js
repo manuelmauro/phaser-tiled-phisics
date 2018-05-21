@@ -16,6 +16,7 @@
  * @property {boolean} [outCollideLeft] - [description]
  * @property {boolean} [outCollideRight] - [description]
  * @property {boolean} [outCollideUp] - [description]
+ * @property {boolean} [collide] - [description]
  *
  */
 class Collision {
@@ -76,6 +77,10 @@ class Collision {
       if (tileFromProps.inCollideUp || tileToProps.outCollideDown) {
         this.body.velocity.set(0, 0);
       }
+    }
+
+    if (tileToProps.collide) {
+      this.body.velocity.set(0, 0);
     }
   }
 

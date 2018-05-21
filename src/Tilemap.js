@@ -6,7 +6,6 @@
 
 import { adjacent } from './utils/tile/index';
 // modifiers
-import SimpleCollision from './modifiers/SimpleCollision';
 import Collision from './modifiers/Collision';
 import Force from './modifiers/Force';
 
