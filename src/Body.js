@@ -165,6 +165,7 @@ class Body {
       this.position.x = this.tile.x * twidth;
       this.velocity.x = 0;
       this.acceleration.x = 0;
+      //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
@@ -172,6 +173,7 @@ class Body {
       this.position.x = this.tile.x * twidth;
       this.velocity.x = 0;
       this.acceleration.x = 0;
+      //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else {
       // the body is moving between two tiles
@@ -186,6 +188,7 @@ class Body {
       this.position.y = this.tile.y * theight;
       this.velocity.y = 0;
       this.acceleration.y = 0;
+      //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
@@ -193,6 +196,7 @@ class Body {
       this.position.y = this.tile.y * theight;
       this.velocity.y = 0;
       this.acceleration.y = 0;
+      //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else {
       // the body is moving between two tiles

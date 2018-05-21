@@ -59,28 +59,28 @@ class Collision {
 
     if (tileFrom.ty === tileTo.ty - 1) {
       // move down
-      if (tileFromProps.inCollideDown || tileToProps.outCollideUp) {
-        this.body.velocity.set(0, 0);
+      if (tileFromProps.inCollideDown || tileToProps.outCollideUp || tileToProps.collide) {
+        if (this.body.velocity.y > 0) { this.body.velocity.y = 0; }
+        if (this.body.acceleration.y > 0) { this.body.acceleration.y = 0; }
       }
     } else if (tileFrom.tx === tileTo.tx + 1) {
       // move left
-      if (tileFromProps.inCollideLeft || tileToProps.outCollideRight) {
-        this.body.velocity.set(0, 0);
+      if (tileFromProps.inCollideLeft || tileToProps.outCollideRight || tileToProps.collide) {
+        if (this.body.velocity.x < 0) { this.body.velocity.x = 0; }
+        if (this.body.acceleration.x < 0) { this.body.acceleration.x = 0; }
       }
     } else if (tileFrom.tx === tileTo.tx - 1) {
       // move right
-      if (tileFromProps.inCollideRight || tileToProps.outCollideLeft) {
-        this.body.velocity.set(0, 0);
+      if (tileFromProps.inCollideRight || tileToProps.outCollideLeft || tileToProps.collide) {
+        if (this.body.velocity.x > 0) { this.body.velocity.x = 0; }
+        if (this.body.acceleration.x > 0) { this.body.acceleration.x = 0; }
       }
     } else if (tileFrom.ty === tileTo.ty + 1) {
       // move up
-      if (tileFromProps.inCollideUp || tileToProps.outCollideDown) {
-        this.body.velocity.set(0, 0);
+      if (tileFromProps.inCollideUp || tileToProps.outCollideDown || tileToProps.collide) {
+        if (this.body.velocity.y < 0) { this.body.velocity.y = 0; }
+        if (this.body.acceleration.y < 0) { this.body.acceleration.y = 0; }
       }
-    }
-
-    if (tileToProps.collide) {
-      this.body.velocity.set(0, 0);
     }
   }
 
