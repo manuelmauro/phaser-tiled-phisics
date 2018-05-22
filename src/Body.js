@@ -75,15 +75,6 @@ class Body {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Arcade.Body#newVelocity
-     * @type {Phaser.Math.Vector2}
-     * @since 3.0.0
-     */
-    this.newVelocity = new Phaser.Math.Vector2();
-
-    /**
-     * [description]
-     *
      * @name Phaser.Physics.Arcade.Body#acceleration
      * @type {Phaser.Math.Vector2}
      * @since 3.0.0
