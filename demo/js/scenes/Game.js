@@ -19,6 +19,12 @@ class Game extends Phaser.Scene {
       { frameWidth: 16, frameHeight: 16, endFrame: 39 },
     );
 
+    this.load.spritesheet(
+      'slime',
+      'assets/images/slime.png',
+      { frameWidth: 16, frameHeight: 16, endFrame: 15 },
+    );
+
     // first you need to load the plugin
     this.load.plugin('TiledPhysics', 'TiledPhysics.js');
   }
@@ -37,6 +43,9 @@ class Game extends Phaser.Scene {
     this.player = this.add.sprite(8, 8);
     this.player.play('hero_face_down');
 
+    this.slime = this.add.sprite(72, 80);
+    this.slime.play('slime_walk_down');
+
     const two = map.createStaticLayer('two', tiles, 0, 0);
 
     // enable layers
@@ -48,12 +57,22 @@ class Game extends Phaser.Scene {
     const player = this.physics.world.enable(this.player);
     this.player.body.setOffset(4, 8);
 
+    const slime = this.physics.world.enable(this.slime);
+    this.slime.body.setOffset(4, 8);
+
     // add modifiers
     this.physics.world.tilemap.addCollision(player, layerZero);
     this.physics.world.tilemap.addCollision(player, layerOne);
     this.physics.world.tilemap.addForce(player, layerZero);
     this.physics.world.tilemap.addForce(player, layerOne);
     this.physics.world.tilemap.addFriction(player, layerOne);
+
+    this.physics.world.tilemap.addCollision(slime, layerZero);
+    this.physics.world.tilemap.addCollision(slime, layerOne);
+    this.physics.world.tilemap.addForce(slime, layerZero);
+    this.physics.world.tilemap.addForce(slime, layerOne);
+
+    this.slime.body.events.on('onTile', this.backAndForth, this);
 
     // camera
     this.cameras.main.startFollow(this.player);
@@ -68,6 +87,7 @@ class Game extends Phaser.Scene {
   }
 
   update(time, delta) {
+    // bodies
     if (this.keys.down.isDown) {
       this.player.body.setVelocityY(50);
     } else if (this.keys.left.isDown) {
@@ -78,6 +98,7 @@ class Game extends Phaser.Scene {
       this.player.body.setVelocityY(-50);
     }
 
+    // animations
     let animDir = '';
     if (this.player.body.velocity.y > 0) {
       animDir = 'down';
@@ -88,9 +109,34 @@ class Game extends Phaser.Scene {
     } else if (this.player.body.velocity.y < 0) {
       animDir = 'up';
     }
-    const anim = `hero_walk_${animDir}`;
+    let anim = `hero_walk_${animDir}`;
     if (anim !== this.player.anims.currentAnim.key) {
       this.player.play(anim);
+    }
+
+    animDir = '';
+    if (this.slime.body.velocity.y > 0) {
+      animDir = 'down';
+    } else if (this.slime.body.velocity.x < 0) {
+      animDir = 'left';
+    } else if (this.slime.body.velocity.x > 0) {
+      animDir = 'right';
+    } else if (this.slime.body.velocity.y < 0) {
+      animDir = 'up';
+    } else {
+      animDir = 'down';
+    }
+    anim = `slime_walk_${animDir}`;
+    if (anim !== this.slime.anims.currentAnim.key) {
+      this.slime.play(anim);
+    }
+  }
+
+  backAndForth() {
+    if (this.slime.body.tile.x < 10) {
+      this.slime.body.velocity.set(50, 0);
+    } else if (this.slime.body.tile.x > 12) {
+      this.slime.body.velocity.set(-50, 0);
     }
   }
 }
