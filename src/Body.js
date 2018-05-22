@@ -272,24 +272,6 @@ class Body {
   }
 
   /**
-   * Resets this Body to the given coordinates. Also positions its parent
-   * Game Object to the same coordinates.
-   * If the body had any velocity or acceleration it is lost as a result
-   * of calling this.
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param {number} x - The horizontal position to place the Game Object and Body.
-   * @param {number} y - The vertical position to place the Game Object and Body.
-   */
-  reset(x, y) {
-    this.position.x = x;
-    this.position.y = y;
-    this.stop();
-  }
-
-  /**
    * [description]
    *
    * @method
@@ -298,8 +280,8 @@ class Body {
    * @return {Physics.Tiled.Body} This Body object.
    */
   stop() {
-    this.velocity.x = 0;
-    this.velocity.y = 0;
+    this.velocity.set(0, 0);
+    this.acceleration.set(0, 0);
     this.snapToGrid();
     return this;
   }
