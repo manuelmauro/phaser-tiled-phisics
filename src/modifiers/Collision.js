@@ -62,24 +62,28 @@ class Collision {
       if (tileFromProps.inCollideDown || tileToProps.outCollideUp || tileToProps.collide) {
         if (this.body.velocity.y > 0) { this.body.velocity.y = 0; }
         if (this.body.acceleration.y > 0) { this.body.acceleration.y = 0; }
+        this.body.snapToGrid();
       }
     } else if (tileFrom.tx === tileTo.tx + 1) {
       // move left
       if (tileFromProps.inCollideLeft || tileToProps.outCollideRight || tileToProps.collide) {
         if (this.body.velocity.x < 0) { this.body.velocity.x = 0; }
         if (this.body.acceleration.x < 0) { this.body.acceleration.x = 0; }
+        this.body.snapToGrid();
       }
     } else if (tileFrom.tx === tileTo.tx - 1) {
       // move right
       if (tileFromProps.inCollideRight || tileToProps.outCollideLeft || tileToProps.collide) {
         if (this.body.velocity.x > 0) { this.body.velocity.x = 0; }
         if (this.body.acceleration.x > 0) { this.body.acceleration.x = 0; }
+        this.body.snapToGrid();
       }
     } else if (tileFrom.ty === tileTo.ty + 1) {
       // move up
       if (tileFromProps.inCollideUp || tileToProps.outCollideDown || tileToProps.collide) {
         if (this.body.velocity.y < 0) { this.body.velocity.y = 0; }
         if (this.body.acceleration.y < 0) { this.body.acceleration.y = 0; }
+        this.body.snapToGrid();
       }
     }
   }

@@ -15,7 +15,7 @@ import { C } from './index';
   * @param x - horizontal direction.
   * @param y - vertical direction.
   *
-  * @return c - the normal direction the vector is pointing, -1 if it is diagonal.
+  * @return c - the 'compass' direction the vector is pointing.
   *
   */
 function direction(x, y) {
@@ -27,6 +27,14 @@ function direction(x, y) {
     return C.RIGHT;
   } else if (y < 0 && x === 0) {
     return C.UP;
+  } else if (x < 0 && y > 0) {
+    return C.DOWN_LEFT;
+  } else if (x > 0 && y > 0) {
+    return C.DOWN_RIGHT;
+  } else if (x < 0 && y < 0) {
+    return C.UP_LEFT;
+  } else if (x > 0 && y < 0) {
+    return C.UP_RIGHT;
   }
   return -1;
 }

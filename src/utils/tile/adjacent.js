@@ -29,6 +29,14 @@ function adjacent(tx, ty, dir) {
       return right(tx, ty);
     case C.UP:
       return up(tx, ty);
+    case C.DOWN_LEFT:
+      return down(left(tx, ty).tx, left(tx, ty).ty);
+    case C.DOWN_RIGHT:
+      return down(right(tx, ty).tx, right(tx, ty).ty);
+    case C.UP_LEFT:
+      return up(left(tx, ty).tx, left(tx, ty).ty);
+    case C.UP_RIGHT:
+      return up(right(tx, ty).tx, right(tx, ty).ty);
     default:
       return {};
   }

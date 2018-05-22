@@ -149,6 +149,9 @@ class Body {
     // compute the behavior of the body moving between two tiles
     this.world.tilemap.transition(this, this.tile.x, this.tile.y, this.facing);
 
+    this.velocity.x = this.velocity.x + (this.acceleration.x * (delta / 1000));
+    this.velocity.y = this.velocity.y + (this.acceleration.y * (delta / 1000));
+
     const next = { };
     next.x = this.position.x
            + (this.velocity.x * (delta / 1000))
@@ -163,16 +166,12 @@ class Body {
       // the body moved one tile right
       this.tile.x = Math.floor(next.x / twidth);
       this.position.x = this.tile.x * twidth;
-      this.velocity.x = 0;
-      this.acceleration.x = 0;
       //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
       this.tile.x = Math.ceil(next.x / twidth);
       this.position.x = this.tile.x * twidth;
-      this.velocity.x = 0;
-      this.acceleration.x = 0;
       //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else {
@@ -186,16 +185,12 @@ class Body {
       // the body moved one tile down
       this.tile.y = Math.floor(next.y / theight);
       this.position.y = this.tile.y * theight;
-      this.velocity.y = 0;
-      this.acceleration.y = 0;
       //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
       this.tile.y = Math.ceil(next.y / theight);
       this.position.y = this.tile.y * theight;
-      this.velocity.y = 0;
-      this.acceleration.y = 0;
       //
       this.world.tilemap.on(this, this.tile.x, this.tile.y);
     } else {

@@ -53,6 +53,7 @@ class Game extends Phaser.Scene {
     this.physics.world.tilemap.addCollision(player, layerOne);
     this.physics.world.tilemap.addForce(player, layerZero);
     this.physics.world.tilemap.addForce(player, layerOne);
+    this.physics.world.tilemap.addFriction(player, layerOne);
 
     // camera
     this.cameras.main.startFollow(this.player);
