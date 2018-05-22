@@ -4,7 +4,7 @@
  * @license
  */
 
-import { direction } from './utils/tile/index';
+import { adjacent, direction } from './utils/tile/index';
 import CONST from './const';
 
 class Body {
@@ -62,7 +62,6 @@ class Body {
      * @since 0.1.0
      */
     this.tile = new Phaser.Math.Vector2();
-    this.snapToGrid();
 
     /**
      * [description]
@@ -127,6 +126,18 @@ class Body {
      * @since 0.1.0
      */
     this.dirty = false;
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#facing
+     * @type
+     * @since 0.1.0
+     */
+    this.events = new Phaser.EventEmitter();
+
+    // init
+    this.snapToGrid();
   }
 
   /**
@@ -147,7 +158,10 @@ class Body {
     }
 
     // compute the behavior of the body moving between two tiles
-    this.world.tilemap.transition(this, this.tile.x, this.tile.y, this.facing);
+    const tileFrom = { tx: this.tile.x, ty: this.tile.y };
+    const tileTo = adjacent(this.tile.x, this.tile.y, this.facing);
+    this.world.tilemap.transition(this, tileFrom, tileTo);
+    this.events.emit('betweenTiles', tileFrom, tileTo);
 
     // Newton's laws of motion
     // velocity
@@ -169,16 +183,20 @@ class Body {
     const twidth = this.world.tilesize.x;
     if (Math.floor(next.x / twidth) > Math.floor(this.position.x / twidth)) {
       // the body moved one tile right
+      // update body
       this.tile.x = Math.floor(next.x / twidth);
       this.position.x = this.tile.x * twidth;
-      //
-      this.world.tilemap.on(this, this.tile.x, this.tile.y);
+      // emit events
+      this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
+      // update body
       this.tile.x = Math.ceil(next.x / twidth);
       this.position.x = this.tile.x * twidth;
-      //
-      this.world.tilemap.on(this, this.tile.x, this.tile.y);
+      // emit events
+      this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else {
       // the body is moving between two tiles
       this.position.x = next.x;
@@ -188,16 +206,20 @@ class Body {
     const theight = this.world.tilesize.x;
     if (Math.floor(next.y / theight) > Math.floor(this.position.y / theight)) {
       // the body moved one tile down
+      // update body
       this.tile.y = Math.floor(next.y / theight);
       this.position.y = this.tile.y * theight;
-      //
-      this.world.tilemap.on(this, this.tile.x, this.tile.y);
+      // emit events
+      this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
+      // update body
       this.tile.y = Math.ceil(next.y / theight);
       this.position.y = this.tile.y * theight;
-      //
-      this.world.tilemap.on(this, this.tile.x, this.tile.y);
+      // emit events
+      this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else {
       // the body is moving between two tiles
       this.position.y = next.y;
@@ -356,6 +378,7 @@ class Body {
     this.tile.y = Math.floor(this.gameObject.y / this.world.tilesize.y);
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
+    this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
   }
 }
 

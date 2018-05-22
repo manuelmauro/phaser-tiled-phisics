@@ -79,6 +79,7 @@ class Tilemap {
    */
   addForce(body, layer) {
     this.modifiers.add(new Force(body, layer));
+    this.on(body, { tx: body.tile.x, ty: body.tile.y });
   }
 
   /**
@@ -93,6 +94,7 @@ class Tilemap {
    */
   addFriction(body, layer) {
     this.modifiers.add(new Friction(body, layer));
+    this.on(body, { tx: body.tile.x, ty: body.tile.y });
   }
 
   /**
@@ -102,15 +104,11 @@ class Tilemap {
    * @since 0.1.0
    *
    * @param object - [description]
-   * @param tx - [description]
-   * @param ty - [description]
-   * @param dir - [description]
+   * @param tileFrom - [description]
+   * @param tileTo - [description]
    *
    */
-  transition(object, tx, ty, dir) {
-    const tileFrom = { tx, ty };
-    const tileTo = adjacent(tx, ty, dir);
-
+  transition(object, tileFrom, tileTo) {
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
       if (modifier.body === object) modifier.transition(tileFrom, tileTo);
@@ -124,13 +122,10 @@ class Tilemap {
    * @since 0.1.0
    *
    * @param object - [description]
-   * @param tx - [description]
-   * @param ty - [description]
+   * @param tile - [description]
    *
    */
-  on(object, tx, ty) {
-    const tile = { tx, ty };
-
+  on(object, tile) {
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
       if (modifier.body === object) modifier.on(tile);
