@@ -149,9 +149,14 @@ class Body {
     // compute the behavior of the body moving between two tiles
     this.world.tilemap.transition(this, this.tile.x, this.tile.y, this.facing);
 
-    this.velocity.x = this.velocity.x + (this.acceleration.x * (delta / 1000));
-    this.velocity.y = this.velocity.y + (this.acceleration.y * (delta / 1000));
+    // Newton's laws of motion
+    // velocity
+    this.velocity.x = this.velocity.x
+                    + (this.acceleration.x * (delta / 1000));
+    this.velocity.y = this.velocity.y
+                    + (this.acceleration.y * (delta / 1000));
 
+    // space
     const next = { };
     next.x = this.position.x
            + (this.velocity.x * (delta / 1000))
