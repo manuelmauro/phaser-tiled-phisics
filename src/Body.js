@@ -128,7 +128,7 @@ class Body {
     this.events = new Phaser.EventEmitter();
 
     // init
-    this.snapToGrid();
+    this.lineUp();
   }
 
   /**
@@ -282,7 +282,7 @@ class Body {
   stop() {
     this.velocity.set(0, 0);
     this.acceleration.set(0, 0);
-    this.snapToGrid();
+    this.lineUp();
     return this;
   }
 
@@ -346,7 +346,7 @@ class Body {
    * @since 0.1.0
    *
    */
-  snapToGrid() {
+  lineUp() {
     this.tile.x = Math.floor(this.gameObject.x / this.world.tilesize.x);
     this.tile.y = Math.floor(this.gameObject.y / this.world.tilesize.y);
     this.position.x = this.world.tilesize.x * this.tile.x;
