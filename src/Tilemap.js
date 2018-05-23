@@ -108,7 +108,9 @@ class Tilemap {
    * @param tileTo - [description]
    *
    */
-  transition(body, tileFrom, tileTo) {
+  transition(body) {
+    const tileFrom = { tx: body.tile.x, ty: body.tile.y };
+    const tileTo = adjacent(body.tile.x, body.tile.y, body.facing);
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
       if (modifier.body === body) modifier.transition(tileFrom, tileTo);
@@ -125,7 +127,8 @@ class Tilemap {
    * @param tile - [description]
    *
    */
-  on(body, tile) {
+  on(body) {
+    const tile = { tx: body.tile.x, ty: body.tile.y };
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
       if (modifier.body === body) modifier.on(tile);

@@ -4,7 +4,7 @@
  * @license
  */
 
-import { adjacent, direction } from './utils/tile/index';
+import { direction } from './utils/tile/index';
 import CONST from './const';
 
 class Body {
@@ -158,9 +158,7 @@ class Body {
     }
 
     // compute the behavior of the body moving between two tiles
-    const tileFrom = { tx: this.tile.x, ty: this.tile.y };
-    const tileTo = adjacent(this.tile.x, this.tile.y, this.facing);
-    this.world.tilemap.transition(this, tileFrom, tileTo);
+    this.world.tilemap.transition(this);
     this.events.emit('Transition');
     this.onTile = false;
 
@@ -197,7 +195,7 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this);
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
       // update body
@@ -206,7 +204,7 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this);
     } else {
       // the body is moving between two tiles
       this.position.x = next.x;
@@ -222,7 +220,7 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this);
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
       // update body
@@ -231,7 +229,7 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
+      this.world.tilemap.on(this);
     } else {
       // the body is moving between two tiles
       this.position.y = next.y;
