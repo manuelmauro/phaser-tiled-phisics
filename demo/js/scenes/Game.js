@@ -72,7 +72,7 @@ class Game extends Phaser.Scene {
     this.physics.world.tilemap.addForce(slime, layerZero);
     this.physics.world.tilemap.addForce(slime, layerOne);
 
-    this.slime.body.events.on('onTile', this.backAndForth, this);
+    this.slime.body.events.on('Tile', this.backAndForth, this);
 
     // camera
     this.cameras.main.startFollow(this.player);

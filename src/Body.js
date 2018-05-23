@@ -161,12 +161,12 @@ class Body {
     const tileFrom = { tx: this.tile.x, ty: this.tile.y };
     const tileTo = adjacent(this.tile.x, this.tile.y, this.facing);
     this.world.tilemap.transition(this, tileFrom, tileTo);
-    this.events.emit('betweenTiles');
+    this.events.emit('Transition');
     this.onTile = false;
 
     // on tile heart beat
     if (this.velocity.x === 0 && this.velocity.y === 0) {
-      this.events.emit('onTile');
+      this.events.emit('Tile');
       this.onTile = true;
     }
 
@@ -196,7 +196,7 @@ class Body {
       this.position.x = this.tile.x * twidth;
       this.onTile = true;
       // emit events
-      this.events.emit('onTile');
+      this.events.emit('Tile');
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
@@ -205,7 +205,7 @@ class Body {
       this.position.x = this.tile.x * twidth;
       this.onTile = true;
       // emit events
-      this.events.emit('onTile');
+      this.events.emit('Tile');
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else {
       // the body is moving between two tiles
@@ -221,7 +221,7 @@ class Body {
       this.position.y = this.tile.y * theight;
       this.onTile = true;
       // emit events
-      this.events.emit('onTile');
+      this.events.emit('Tile');
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
@@ -230,7 +230,7 @@ class Body {
       this.position.y = this.tile.y * theight;
       this.onTile = true;
       // emit events
-      this.events.emit('onTile');
+      this.events.emit('Tile');
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
     } else {
       // the body is moving between two tiles
