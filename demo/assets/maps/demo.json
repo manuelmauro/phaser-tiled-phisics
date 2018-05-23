@@ -229,129 +229,129 @@
                 },
              "324":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideLeft":true,
+                 "inertia":1,
                  "outCollideLeft":true,
                  "outCollideUp":true
                 },
              "325":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideRight":true,
+                 "inertia":1,
                  "outCollideRight":true,
                  "outCollideUp":true
                 },
              "326":
                 {
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideRight":true,
                  "outCollideUp":true
                 },
              "327":
                 {
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideRight":true,
                  "outCollideUp":true
                 },
              "328":
                 {
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true
                 },
              "329":
                 {
-                 "friction":1,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideRight":true
                 },
              "330":
                 {
-                 "friction":1,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideLeft":true,
                  "outCollideUp":true
                 },
              "331":
                 {
-                 "friction":1,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideLeft":true,
                  "outCollideUp":true
                 },
              "340":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideLeft":true,
+                 "inertia":1,
                  "outCollideLeft":true,
                  "outCollideUp":true
                 },
              "341":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideRight":true,
+                 "inertia":1,
                  "outCollideRight":true,
                  "outCollideUp":true
                 },
              "342":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideLeft":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideRight":true
                 },
              "343":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideLeft":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideRight":true
                 },
              "344":
                 {
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true
                 },
              "345":
                 {
-                 "friction":1,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideRight":true
                 },
              "346":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideRight":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true
                 },
              "347":
                 {
-                 "friction":1,
                  "inCollideDown":true,
                  "inCollideRight":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true
                 },
@@ -359,97 +359,97 @@
                 {
                  "forceDirection":2,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "385":
                 {
                  "forceDirection":2,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "386":
                 {
                  "forceDirection":0,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "387":
                 {
                  "forceDirection":0,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "400":
                 {
                  "forceDirection":2,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "401":
                 {
                  "forceDirection":2,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "402":
                 {
                  "forceDirection":0,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "403":
                 {
                  "forceDirection":0,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "416":
                 {
                  "forceDirection":3,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "417":
                 {
                  "forceDirection":3,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "418":
                 {
                  "forceDirection":1,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "419":
                 {
                  "forceDirection":1,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "432":
                 {
                  "forceDirection":3,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "433":
                 {
                  "forceDirection":3,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "434":
                 {
                  "forceDirection":1,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "435":
                 {
                  "forceDirection":1,
                  "forceIntensity":100,
-                 "friction":1
+                 "inertia":1
                 },
              "455":
                 {
@@ -668,129 +668,129 @@
                 },
              "324":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideLeft":"bool",
+                 "inertia":"float",
                  "outCollideLeft":"bool",
                  "outCollideUp":"bool"
                 },
              "325":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideRight":"bool",
+                 "inertia":"float",
                  "outCollideRight":"bool",
                  "outCollideUp":"bool"
                 },
              "326":
                 {
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideRight":"bool",
                  "outCollideUp":"bool"
                 },
              "327":
                 {
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideRight":"bool",
                  "outCollideUp":"bool"
                 },
              "328":
                 {
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool"
                 },
              "329":
                 {
-                 "friction":"float",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideRight":"bool"
                 },
              "330":
                 {
-                 "friction":"float",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideLeft":"bool",
                  "outCollideUp":"bool"
                 },
              "331":
                 {
-                 "friction":"float",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideLeft":"bool",
                  "outCollideUp":"bool"
                 },
              "340":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideLeft":"bool",
+                 "inertia":"float",
                  "outCollideLeft":"bool",
                  "outCollideUp":"bool"
                 },
              "341":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideRight":"bool",
+                 "inertia":"float",
                  "outCollideRight":"bool",
                  "outCollideUp":"bool"
                 },
              "342":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideLeft":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideRight":"bool"
                 },
              "343":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideLeft":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideRight":"bool"
                 },
              "344":
                 {
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool"
                 },
              "345":
                 {
-                 "friction":"float",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideRight":"bool"
                 },
              "346":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideRight":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool"
                 },
              "347":
                 {
-                 "friction":"float",
                  "inCollideDown":"bool",
                  "inCollideRight":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool"
                 },
@@ -798,97 +798,97 @@
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "385":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "386":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "387":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "400":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "401":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "402":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "403":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "416":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "417":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "418":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "419":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "432":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "433":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "434":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "435":
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float"
+                 "inertia":"float"
                 },
              "455":
                 {
