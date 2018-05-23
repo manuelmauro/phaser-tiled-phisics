@@ -4,6 +4,8 @@
  * @license
  */
 
+import { C } from '../utils/tile/index';
+
 /**
  * @typedef {object} Tile
  *
@@ -60,16 +62,16 @@ class Force {
 
     if (props) {
       switch (props.forceDirection) {
-        case 0:
+        case C.DOWN:
           this.body.acceleration.y = props.forceIntensity;
           break;
-        case 1:
+        case C.LEFT:
           this.body.acceleration.x = -props.forceIntensity;
           break;
-        case 2:
+        case C.RIGHT:
           this.body.acceleration.x = props.forceIntensity;
           break;
-        case 3:
+        case C.UP:
           this.body.acceleration.y = -props.forceIntensity;
           break;
         default:

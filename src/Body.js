@@ -4,8 +4,7 @@
  * @license
  */
 
-import { direction } from './utils/tile/index';
-import CONST from './const';
+import { C, direction } from './utils/tile/index';
 
 class Body {
   constructor(world, gameObject) {
@@ -106,7 +105,7 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.facing = CONST.DOWN;
+    this.facing = C.DOWN;
 
     /**
      * [description]
