@@ -8,7 +8,7 @@ import { adjacent } from './utils/tile/index';
 // modifiers
 import Collision from './modifiers/Collision';
 import Force from './modifiers/Force';
-import Friction from './modifiers/Friction';
+import Inertia from './modifiers/Inertia';
 
 class Tilemap {
   constructor(world) {
@@ -92,8 +92,8 @@ class Tilemap {
    * @param layer - [description]
    *
    */
-  addFriction(body, layer) {
-    this.modifiers.add(new Friction(body, layer));
+  addInertia(body, layer) {
+    this.modifiers.add(new Inertia(body, layer));
     this.on(body, { tx: body.tile.x, ty: body.tile.y });
   }
 

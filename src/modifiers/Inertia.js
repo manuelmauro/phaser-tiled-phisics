@@ -10,7 +10,7 @@
  * @property {float} [friction] - [description]
  *
  */
-class Friction {
+class Inertia {
   constructor(body, layer) {
     /**
      * [description]
@@ -76,4 +76,4 @@ class Friction {
   }
 }
 
-export default Friction;
+export default Inertia;
