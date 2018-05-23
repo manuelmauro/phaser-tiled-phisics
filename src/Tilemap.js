@@ -103,15 +103,15 @@ class Tilemap {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
+   * @param body - [description]
    * @param tileFrom - [description]
    * @param tileTo - [description]
    *
    */
-  transition(object, tileFrom, tileTo) {
+  transition(body, tileFrom, tileTo) {
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
-      if (modifier.body === object) modifier.transition(tileFrom, tileTo);
+      if (modifier.body === body) modifier.transition(tileFrom, tileTo);
     });
   }
 
@@ -121,14 +121,14 @@ class Tilemap {
    * @method
    * @since 0.1.0
    *
-   * @param object - [description]
+   * @param body - [description]
    * @param tile - [description]
    *
    */
-  on(object, tile) {
+  on(body, tile) {
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
-      if (modifier.body === object) modifier.on(tile);
+      if (modifier.body === body) modifier.on(tile);
     });
   }
 }
