@@ -88,14 +88,15 @@ class Game extends Phaser.Scene {
 
   update(time, delta) {
     // bodies
+    const speed = 50;
     if (this.keys.down.isDown) {
-      this.player.body.safeVelocity(0, 50);
+      this.player.body.safeVelocity(0, speed);
     } else if (this.keys.left.isDown) {
-      this.player.body.safeVelocity(-50, 0);
+      this.player.body.safeVelocity(-speed, 0);
     } else if (this.keys.right.isDown) {
-      this.player.body.safeVelocity(50, 0);
+      this.player.body.safeVelocity(speed, 0);
     } else if (this.keys.up.isDown) {
-      this.player.body.safeVelocity(0, -50);
+      this.player.body.safeVelocity(0, -speed);
     }
 
     // animations
