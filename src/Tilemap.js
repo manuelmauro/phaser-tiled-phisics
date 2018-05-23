@@ -79,7 +79,7 @@ class Tilemap {
    */
   addForce(body, layer) {
     this.modifiers.add(new Force(body, layer));
-    this.on(body, { tx: body.tile.x, ty: body.tile.y });
+    this.on(body);
   }
 
   /**
@@ -94,7 +94,7 @@ class Tilemap {
    */
   addInertia(body, layer) {
     this.modifiers.add(new Inertia(body, layer));
-    this.on(body, { tx: body.tile.x, ty: body.tile.y });
+    this.on(body);
   }
 
   /**
