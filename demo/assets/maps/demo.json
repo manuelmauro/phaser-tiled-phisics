@@ -131,11 +131,7 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "157":
                 {
@@ -143,11 +139,7 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "16":
                 {
@@ -172,11 +164,7 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "204":
                 {
@@ -191,11 +179,7 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "220":
                 {
@@ -210,22 +194,14 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "313":
                 {
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "324":
                 {
@@ -457,11 +433,7 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "456":
                 {
@@ -469,11 +441,7 @@
                  "inDown":true,
                  "inLeft":true,
                  "inRight":true,
-                 "inUp":true,
-                 "outDown":true,
-                 "outLeft":true,
-                 "outRight":true,
-                 "outUp":true
+                 "inUp":true
                 },
              "78":
                 {
@@ -570,11 +538,7 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "157":
                 {
@@ -582,11 +546,7 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "16":
                 {
@@ -611,11 +571,7 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "204":
                 {
@@ -630,11 +586,7 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "220":
                 {
@@ -649,22 +601,14 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "313":
                 {
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "324":
                 {
@@ -896,11 +840,7 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "456":
                 {
@@ -908,11 +848,7 @@
                  "inDown":"bool",
                  "inLeft":"bool",
                  "inRight":"bool",
-                 "inUp":"bool",
-                 "outDown":"bool",
-                 "outLeft":"bool",
-                 "outRight":"bool",
-                 "outUp":"bool"
+                 "inUp":"bool"
                 },
              "78":
                 {
