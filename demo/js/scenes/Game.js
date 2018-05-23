@@ -61,16 +61,16 @@ class Game extends Phaser.Scene {
     this.slime.body.setOffset(4, 8);
 
     // add modifiers
-    this.physics.world.tilemap.addCollision(player, layerZero);
-    this.physics.world.tilemap.addCollision(player, layerOne);
-    this.physics.world.tilemap.addForce(player, layerZero);
-    this.physics.world.tilemap.addForce(player, layerOne);
-    this.physics.world.tilemap.addInertia(player, layerOne);
+    this.physics.add.collision(player, layerZero);
+    this.physics.add.collision(player, layerOne);
+    this.physics.add.force(player, layerZero);
+    this.physics.add.force(player, layerOne);
+    this.physics.add.inertia(player, layerOne);
 
-    this.physics.world.tilemap.addCollision(slime, layerZero);
-    this.physics.world.tilemap.addCollision(slime, layerOne);
-    this.physics.world.tilemap.addForce(slime, layerZero);
-    this.physics.world.tilemap.addForce(slime, layerOne);
+    this.physics.add.collision(slime, layerZero);
+    this.physics.add.collision(slime, layerOne);
+    this.physics.add.force(slime, layerZero);
+    this.physics.add.force(slime, layerOne);
 
     this.slime.body.events.on('Tile', this.backAndForth, this);
 

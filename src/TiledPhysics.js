@@ -5,13 +5,14 @@
  */
 
 import World from './World';
+import Factory from './Factory';
 
 class TiledPhysics {
   constructor(scene) {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#
+     * @name Physics.Tiled.TiledPhysics#
      * @type
      * @since 0.1.0
      */
@@ -20,7 +21,7 @@ class TiledPhysics {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#scene
+     * @name Physics.Tiled.TiledPhysics#scene
      * @type {Phaser.Scene}
      * @since 0.1.0
      */
@@ -30,7 +31,7 @@ class TiledPhysics {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#world
+     * @name Physics.Tiled.TiledPhysics#world
      * @type
      * @since 0.1.0
      */
@@ -39,7 +40,16 @@ class TiledPhysics {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Tiled.TiledPhysics#systems
+     * @name .Physics.Tiled.TiledPhysics#world
+     * @type
+     * @since 0.1.0
+     */
+    this.add = undefined;
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.TiledPhysics#systems
      * @type
      * @since 0.1.0
      */
@@ -59,6 +69,7 @@ class TiledPhysics {
   boot() {
     if (!this.world) {
       this.world = new World(this.scene, this.config);
+      this.add = new Factory(this.world);
     }
 
     const eventEmitter = this.systems.events;
