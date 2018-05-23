@@ -138,8 +138,6 @@ class Body {
 
     // init
     this.lineUp();
-    this.events.on('onTile', () => { this.onTile = true; }, this);
-    this.events.on('betweenTiles', () => { this.onTile = false; }, this);
   }
 
   /**
@@ -164,10 +162,12 @@ class Body {
     const tileTo = adjacent(this.tile.x, this.tile.y, this.facing);
     this.world.tilemap.transition(this, tileFrom, tileTo);
     this.events.emit('betweenTiles', tileFrom, tileTo);
+    this.onTile = false;
 
     // on tile heart beat
     if (this.velocity.x === 0 && this.velocity.y === 0) {
       this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+      this.onTile = true;
     }
 
     // Newton's laws of motion
@@ -193,6 +193,7 @@ class Body {
       // update body
       this.tile.x = Math.floor(next.x / twidth);
       this.position.x = this.tile.x * twidth;
+      this.onTile = true;
       // emit events
       this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
@@ -201,6 +202,7 @@ class Body {
       // update body
       this.tile.x = Math.ceil(next.x / twidth);
       this.position.x = this.tile.x * twidth;
+      this.onTile = true;
       // emit events
       this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
@@ -216,6 +218,7 @@ class Body {
       // update body
       this.tile.y = Math.floor(next.y / theight);
       this.position.y = this.tile.y * theight;
+      this.onTile = true;
       // emit events
       this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
@@ -224,6 +227,7 @@ class Body {
       // update body
       this.tile.y = Math.ceil(next.y / theight);
       this.position.y = this.tile.y * theight;
+      this.onTile = true;
       // emit events
       this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
       this.world.tilemap.on(this, { tx: this.tile.x, ty: this.tile.y });
