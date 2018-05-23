@@ -446,7 +446,7 @@
              "78":
                 {
                  "forceDirection":0,
-                 "forceIntensity":1000,
+                 "forceIntensity":10000,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
@@ -458,7 +458,7 @@
              "79":
                 {
                  "forceDirection":0,
-                 "forceIntensity":1000,
+                 "forceIntensity":10000,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
@@ -470,7 +470,7 @@
              "94":
                 {
                  "forceDirection":0,
-                 "forceIntensity":1000,
+                 "forceIntensity":10000,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
@@ -482,7 +482,7 @@
              "95":
                 {
                  "forceDirection":0,
-                 "forceIntensity":1000,
+                 "forceIntensity":10000,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
