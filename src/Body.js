@@ -121,14 +121,25 @@ class Body {
     /**
      * [description]
      *
-     * @name Physics.Tiled.Body#facing
+     * @name Physics.Tiled.Body#events
      * @type
      * @since 0.1.0
      */
     this.events = new Phaser.EventEmitter();
 
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#onTile
+     * @type
+     * @since 0.1.0
+     */
+    this.onTile = true;
+
     // init
     this.lineUp();
+    this.events.on('onTile', () => { this.onTile = true; }, this);
+    this.events.on('betweenTiles', () => { this.onTile = false; }, this);
   }
 
   /**
@@ -153,6 +164,11 @@ class Body {
     const tileTo = adjacent(this.tile.x, this.tile.y, this.facing);
     this.world.tilemap.transition(this, tileFrom, tileTo);
     this.events.emit('betweenTiles', tileFrom, tileTo);
+
+    // on tile heart beat
+    if (this.velocity.x === 0 && this.velocity.y === 0) {
+      this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+    }
 
     // Newton's laws of motion
     // velocity
@@ -291,52 +307,15 @@ class Body {
    *
    * @method
    * @since 0.1.0
+   *
+   * @param {number} x - [description]
+   * @param {number} y - [description]
+   *
    */
-  destroy() {
-    this.enable = false;
-    this.world.pendingDestroy.set(this);
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param {number} value - [description]
-   *
-   * @return This Body object.
-   */
-  setVelocityX(value) {
-    if (this.velocity.y !== 0) {
-      return this;
+  safeVelocity(x, y) {
+    if (this.onTile) {
+      this.velocity.set(x, y);
     }
-
-    this.velocity.x = value;
-    this.velocity.y = 0;
-
-    return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param {number} value - [description]
-   *
-   * @return This Body object.
-   */
-  setVelocityY(value) {
-    if (this.velocity.x !== 0) {
-      return this;
-    }
-
-    this.velocity.x = 0;
-    this.velocity.y = value;
-
-    return this;
   }
 
   /**
@@ -352,6 +331,17 @@ class Body {
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
     this.events.emit('onTile', { tx: this.tile.x, ty: this.tile.y });
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   */
+  destroy() {
+    this.enable = false;
+    this.world.pendingDestroy.set(this);
   }
 }
 
