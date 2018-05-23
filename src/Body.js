@@ -173,7 +173,6 @@ class Body {
                     + (this.acceleration.x * (delta / 1000));
     this.velocity.y = this.velocity.y
                     + (this.acceleration.y * (delta / 1000));
-
     // space
     const next = { };
     next.x = this.position.x
@@ -250,6 +249,7 @@ class Body {
 
     this.dirty = false;
 
+    // apply changes to graphical object
     this.gameObject.x = (this.position.x + (this.gameObject.width / 2)) - this.offset.x;
     this.gameObject.y = (this.position.y + (this.gameObject.height / 2)) - this.offset.y;
   }
@@ -263,7 +263,7 @@ class Body {
    * @param {number} x - [description]
    * @param {number} y - [description]
    *
-   * @return
+   * @return {Physics.Tiled.Body} This Body object.
    *
    */
   setOffset(x, y) {
@@ -280,7 +280,7 @@ class Body {
    * @param {number} width - [description]
    * @param {number} height - [description]
    *
-   * @return
+   * @return {Physics.Tiled.Body} This Body object.
    *
    */
   setSize(width, height) {
@@ -296,6 +296,7 @@ class Body {
    * @since 0.1.0
    *
    * @return {Physics.Tiled.Body} This Body object.
+   *
    */
   stop() {
     this.velocity.set(0, 0);
@@ -313,11 +314,14 @@ class Body {
    * @param {number} x - [description]
    * @param {number} y - [description]
    *
+   * @return {Physics.Tiled.Body} This Body object.
+   *
    */
   safeVelocity(x, y) {
     if (this.onTile) {
       this.velocity.set(x, y);
     }
+    return this;
   }
 
   /**
