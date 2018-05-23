@@ -15,7 +15,7 @@
              "level":"int"
             },
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":72,
          "x":0,
          "y":0
@@ -479,10 +479,10 @@
                 {
                  "forceDirection":0,
                  "forceIntensity":1000,
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true,
                  "outCollideRight":true
@@ -491,10 +491,10 @@
                 {
                  "forceDirection":0,
                  "forceIntensity":1000,
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true,
                  "outCollideRight":true
@@ -503,10 +503,10 @@
                 {
                  "forceDirection":0,
                  "forceIntensity":1000,
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true,
                  "outCollideRight":true
@@ -515,10 +515,10 @@
                 {
                  "forceDirection":0,
                  "forceIntensity":1000,
-                 "friction":1,
                  "inCollideLeft":true,
                  "inCollideRight":true,
                  "inCollideUp":true,
+                 "inertia":1,
                  "outCollideDown":true,
                  "outCollideLeft":true,
                  "outCollideRight":true
@@ -918,10 +918,10 @@
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool",
                  "outCollideRight":"bool"
@@ -930,10 +930,10 @@
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool",
                  "outCollideRight":"bool"
@@ -942,10 +942,10 @@
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool",
                  "outCollideRight":"bool"
@@ -954,10 +954,10 @@
                 {
                  "forceDirection":"int",
                  "forceIntensity":"float",
-                 "friction":"float",
                  "inCollideLeft":"bool",
                  "inCollideRight":"bool",
                  "inCollideUp":"bool",
+                 "inertia":"float",
                  "outCollideDown":"bool",
                  "outCollideLeft":"bool",
                  "outCollideRight":"bool"

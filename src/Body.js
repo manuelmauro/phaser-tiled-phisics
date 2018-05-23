@@ -186,6 +186,7 @@ class Body {
            + (this.velocity.y * (delta / 1000))
            + ((1 / 2) * this.acceleration.y * ((delta / 1000) ** 2));
 
+    // make sure that the body goes through all the tiles along its path
     // x axis
     const twidth = this.world.tilesize.x;
     if (Math.floor(next.x / twidth) > Math.floor(this.position.x / twidth)) {
