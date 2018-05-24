@@ -43,7 +43,7 @@ class Game extends Phaser.Scene {
     this.player = this.add.sprite(8, 8);
     this.player.play('hero_face_down');
 
-    this.slime = this.add.sprite(72, 80);
+    this.slime = this.add.sprite(80, 48);
     this.slime.play('slime_walk_down');
 
     const two = map.createStaticLayer('two', tiles, 0, 0);
@@ -134,10 +134,10 @@ class Game extends Phaser.Scene {
   }
 
   backAndForth() {
-    if (this.slime.body.tile.x < 10) {
-      this.slime.body.velocity.set(50, 0);
-    } else if (this.slime.body.tile.x > 12) {
-      this.slime.body.velocity.set(-50, 0);
+    if (this.slime.body.tile.x < 11) {
+      this.slime.body.velocity.set(10, 0);
+    } else if (this.slime.body.tile.x > 14) {
+      this.slime.body.velocity.set(-10, 0);
     }
   }
 }
