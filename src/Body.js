@@ -146,7 +146,6 @@ class Body {
    * @since 0.1.0
    *
    * @param {number} delta - [description]
-   *
    */
   update(delta) {
     this.dirty = true;
@@ -239,7 +238,6 @@ class Body {
    *
    * @method Physics.Tiled.Body#postUpdate
    * @since 0.1.0
-   *
    */
   postUpdate() {
     //  Only allow postUpdate to be called once per frame
@@ -249,7 +247,7 @@ class Body {
 
     this.dirty = false;
 
-    // apply changes to graphical object
+    // apply changes to the graphical object
     this.gameObject.x = (this.position.x + (this.gameObject.width / 2)) - this.offset.x;
     this.gameObject.y = (this.position.y + (this.gameObject.height / 2)) - this.offset.y;
   }
@@ -264,7 +262,6 @@ class Body {
    * @param {number} y - [description]
    *
    * @return {Physics.Tiled.Body} This Body object.
-   *
    */
   setOffset(x, y) {
     this.offset.set(x, y);
@@ -281,7 +278,6 @@ class Body {
    * @param {number} height - [description]
    *
    * @return {Physics.Tiled.Body} This Body object.
-   *
    */
   setSize(width, height) {
     this.width = width;
@@ -296,7 +292,6 @@ class Body {
    * @since 0.1.0
    *
    * @return {Physics.Tiled.Body} This Body object.
-   *
    */
   stop() {
     this.velocity.set(0, 0);
@@ -315,7 +310,6 @@ class Body {
    * @param {number} y - [description]
    *
    * @return {Physics.Tiled.Body} This Body object.
-   *
    */
   safeVelocity(x, y) {
     if (this.onTile) {
@@ -330,12 +324,14 @@ class Body {
    * @method
    * @since 0.1.0
    *
+   * @return {Physics.Tiled.Body} This Body object.
    */
   lineUp() {
     this.tile.x = Math.floor(this.gameObject.x / this.world.tilesize.x);
     this.tile.y = Math.floor(this.gameObject.y / this.world.tilesize.y);
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
+    return this;
   }
 
   /**

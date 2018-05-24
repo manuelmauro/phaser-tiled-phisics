@@ -47,7 +47,6 @@ class Tilemap {
    * @since 0.1.0
    *
    * @param modifier - [description]
-   *
    */
   addModifier(modifier) {
     this.modifiers.add(modifier);
@@ -75,7 +74,6 @@ class Tilemap {
    *
    * @param body - [description]
    * @param layer - [description]
-   *
    */
   addForce(body, layer) {
     this.modifiers.add(new Force(body, layer));
@@ -90,7 +88,6 @@ class Tilemap {
    *
    * @param body - [description]
    * @param layer - [description]
-   *
    */
   addInertia(body, layer) {
     this.modifiers.add(new Inertia(body, layer));
@@ -106,7 +103,6 @@ class Tilemap {
    * @param body - [description]
    * @param tileFrom - [description]
    * @param tileTo - [description]
-   *
    */
   transition(body) {
     const tileFrom = { tx: body.tile.x, ty: body.tile.y };
@@ -125,7 +121,6 @@ class Tilemap {
    *
    * @param body - [description]
    * @param tile - [description]
-   *
    */
   on(body) {
     const tile = { tx: body.tile.x, ty: body.tile.y };
