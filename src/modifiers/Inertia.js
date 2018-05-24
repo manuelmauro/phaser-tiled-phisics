@@ -8,7 +8,6 @@
  * @typedef {object} Tile
  *
  * @property {float} [inertia] - [description]
- *
  */
 class Inertia {
   constructor(body, layer) {
@@ -39,7 +38,6 @@ class Inertia {
    *
    * @param tileFrom - [description]
    * @param tileTo - [description]
-   *
    */
   transition(tileFrom, tileTo) {
   }
@@ -51,7 +49,6 @@ class Inertia {
    * @since 0.1.0
    *
    * @param tile - [description]
-   *
    */
   on(tile) {
     const id = this.layer.data[tile.tx][tile.ty];

@@ -60,7 +60,6 @@ class Tilemap {
    *
    * @param body - [description]
    * @param layer - [description]
-   *
    */
   addCollision(body, layer) {
     this.modifiers.add(new Collision(body, layer));

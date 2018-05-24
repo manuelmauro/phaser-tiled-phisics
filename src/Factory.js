@@ -32,7 +32,6 @@ class Factory {
    * @since 0.1.0
    *
    * @param modifier - [description]
-   *
    */
   modifier(modifier) {
     this.tilemap.addModifier(modifier);
@@ -46,7 +45,6 @@ class Factory {
    *
    * @param body - [description]
    * @param layer - [description]
-   *
    */
   collision(body, layer) {
     this.tilemap.addCollision(body, layer);
@@ -60,7 +58,6 @@ class Factory {
    *
    * @param body - [description]
    * @param layer - [description]
-   *
    */
   force(body, layer) {
     this.tilemap.addForce(body, layer);
@@ -75,7 +72,6 @@ class Factory {
    *
    * @param body - [description]
    * @param layer - [description]
-   *
    */
   inertia(body, layer) {
     this.tilemap.addInertia(body, layer);

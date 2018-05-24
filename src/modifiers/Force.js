@@ -11,7 +11,6 @@ import { C } from '../utils/tile/index';
  *
  * @property {int} [forceDirection] - [description]
  * @property {float} [forceIntensity] - [description]
- *
  */
 class Force {
   constructor(body, layer) {
@@ -42,7 +41,6 @@ class Force {
    *
    * @param tileFrom - [description]
    * @param tileTo - [description]
-   *
    */
   transition(tileFrom, tileTo) {
   }
@@ -54,7 +52,6 @@ class Force {
    * @since 0.1.0
    *
    * @param tile - [description]
-   *
    */
   on(tile) {
     const id = this.layer.data[tile.tx][tile.ty];

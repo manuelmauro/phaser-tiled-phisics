@@ -17,7 +17,6 @@
  * @property {boolean} [outCollideRight] - [description]
  * @property {boolean} [outCollideUp] - [description]
  * @property {boolean} [collide] - [description]
- *
  */
 class Collision {
   constructor(body, layer) {
@@ -48,7 +47,6 @@ class Collision {
    *
    * @param tileFrom - [description]
    * @param tileTo - [description]
-   *
    */
   transition(tileFrom, tileTo) {
     const tileFromId = this.layer.data[tileFrom.tx][tileFrom.ty];
@@ -97,7 +95,6 @@ class Collision {
    * @since 0.1.0
    *
    * @param tile - [description]
-   *
    */
   on(tile) {
   }

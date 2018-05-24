@@ -73,7 +73,6 @@ export default class World {
    * @since 0.1.0
    *
    * @param {Phaser.GameObjects.GameObject} object - [description]
-   *
    */
   enable(object) {
     const layer = new Layer(this.tilemap);
@@ -116,7 +115,6 @@ export default class World {
    * @since 0.1.0
    *
    * @param {Phaser.GameObjects.GameObject} object - [description]
-   *
    */
   disable(object) {
     object.enable = false;
@@ -133,7 +131,6 @@ export default class World {
    * @param
    * @param
    * @param
-   *
    */
   addCollider(object1, object2, collideCallback, processCallback, callbackContext) {
 
@@ -148,7 +145,6 @@ export default class World {
    * @param
    *
    * @return
-   *
    */
   removeCollider(collider) {
     this.colliders.remove(collider);
@@ -163,7 +159,6 @@ export default class World {
    *
    * @param
    * @param
-   *
    */
   update(time, delta) {
     if (this.bodies.size === 0) { return; }
@@ -176,7 +171,6 @@ export default class World {
    *
    * @method
    * @since 0.1.0
-   *
    */
   postUpdate() {
     this.bodies.each((body) => { if (body.enable) body.postUpdate(); });
@@ -192,7 +186,6 @@ export default class World {
    * @param
    * @param
    * @param
-   *
    */
   collideHandler(object1, object2, collideCallback, callbackContext) {
 
