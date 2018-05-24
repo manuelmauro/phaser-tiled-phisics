@@ -7,7 +7,10 @@
 import Body from './Body';
 import Tilemap from './Tilemap';
 import Layer from './Layer';
+import NonElastic from './colliders/NonElastic';
+
 import CONST from './const';
+import { adjacent } from './utils/tile/index';
 
 export default class World {
   constructor(scene, config) {
@@ -128,37 +131,6 @@ export default class World {
    *
    * @param
    * @param
-   * @param
-   * @param
-   * @param
-   */
-  addCollider(object1, object2, collideCallback, processCallback, callbackContext) {
-
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param
-   *
-   * @return
-   */
-  removeCollider(collider) {
-    this.colliders.remove(collider);
-    return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param
-   * @param
    */
   update(time, delta) {
     if (this.bodies.size === 0) { return; }
@@ -182,12 +154,54 @@ export default class World {
    * @method
    * @since 0.1.0
    *
-   * @param
-   * @param
-   * @param
-   * @param
+   * @param collider - [description]
    */
-  collideHandler(object1, object2, collideCallback, callbackContext) {
+  addCollider(collider) {
+    this.colliders.add(collider);
+  }
 
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param
+   *
+   * @return
+   */
+  removeCollider(collider) {
+    this.colliders.remove(collider);
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param body - [description]
+   * @param layer - [description]
+   */
+  addNonElastic(body1, body2) {
+    this.colliders.add(new NonElastic(body1, body2));
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param body - [description]
+   */
+  transition(body) {
+    const tileFrom = { tx: body.tile.x, ty: body.tile.y };
+    const tileTo = adjacent(body.tile.x, body.tile.y, body.facing);
+    // compute colliders
+    this.colliders.update().forEach((collider) => {
+      if (collider.body1 === body) collider.transition(tileFrom, tileTo);
+    });
   }
 }

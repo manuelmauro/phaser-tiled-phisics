@@ -40,11 +40,11 @@ class Game extends Phaser.Scene {
     const one = map.createStaticLayer('one', tiles, 0, 0);
     makeAnimations(this);
 
-    this.player = this.add.sprite(8, 8);
-    this.player.play('hero_face_down');
-
     this.slime = this.add.sprite(80, 48);
     this.slime.play('slime_walk_down');
+
+    this.player = this.add.sprite(8, 8);
+    this.player.play('hero_face_down');
 
     const two = map.createStaticLayer('two', tiles, 0, 0);
 
@@ -60,6 +60,10 @@ class Game extends Phaser.Scene {
     const slime = this.physics.world.enable(this.slime);
     this.slime.body.setOffset(4, 8);
 
+    // add colliders
+    this.physics.world.addNonElastic(player, slime);
+    this.physics.world.addNonElastic(slime, player);
+
     // add modifiers
     this.physics.add.collision(player, layerZero);
     this.physics.add.collision(player, layerOne);
@@ -72,6 +76,7 @@ class Game extends Phaser.Scene {
     this.physics.add.force(slime, layerZero);
     this.physics.add.force(slime, layerOne);
 
+    this.switch = false;
     this.slime.body.events.on('Tile', this.backAndForth, this);
 
     // camera
@@ -134,10 +139,13 @@ class Game extends Phaser.Scene {
   }
 
   backAndForth() {
-    if (this.slime.body.tile.x < 11) {
+    if (this.slime.body.tile.x < 11 || !this.switch) {
       this.slime.body.velocity.set(10, 0);
-    } else if (this.slime.body.tile.x > 14) {
+      this.switch = false;
+    }
+    if (this.slime.body.tile.x > 14 || this.switch) {
       this.slime.body.velocity.set(-10, 0);
+      this.switch = true;
     }
   }
 }

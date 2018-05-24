@@ -58,6 +58,21 @@ class Tilemap {
    * @method
    * @since 0.1.0
    *
+   * @param
+   *
+   * @return
+   */
+  removeModifier(modifier) {
+    this.modifiers.remove(modifier);
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
    * @param body - [description]
    * @param layer - [description]
    */
@@ -129,4 +144,5 @@ class Tilemap {
     });
   }
 }
+
 export default Tilemap;
