@@ -141,14 +141,7 @@ class Body {
   update(delta) {
     this.dirty = true;
 
-    // facing direction
-    if (this.velocity.x !== 0 || this.velocity.y !== 0) {
-      this.facing = direction(this.velocity.x, this.velocity.y);
-    }
-
     // compute the behavior of the body moving between two tiles
-    // TODO move this to World
-    this.world.tilemap.transition(this);
     this.events.emit('Transition');
     this.onTile = false;
 
@@ -238,6 +231,21 @@ class Body {
     // apply changes to the graphical object
     this.gameObject.x = (this.position.x + (this.gameObject.width / 2)) - this.offset.x;
     this.gameObject.y = (this.position.y + (this.gameObject.height / 2)) - this.offset.y;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @return
+   */
+  heading() {
+    if (this.velocity.x !== 0 || this.velocity.y !== 0) {
+      this.facing = direction(this.velocity.x, this.velocity.y);
+    }
+    return this.facing;
   }
 
   /**
