@@ -137,9 +137,9 @@ export default class World {
 
     this.bodies.each((body) => {
       if (!body.enable) { return; }
-      body.update(delta);
-      this.transition(body);
       this.tilemap.transition(body);
+      this.transition(body);
+      body.update(delta);
       if (body.onTile) this.tilemap.on(body);
     });
   }

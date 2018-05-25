@@ -147,6 +147,8 @@ class Body {
     }
 
     // compute the behavior of the body moving between two tiles
+    // TODO move this to World
+    this.world.tilemap.transition(this);
     this.events.emit('Transition');
     this.onTile = false;
 
