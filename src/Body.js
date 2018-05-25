@@ -212,6 +212,11 @@ class Body {
       // the body is moving between two tiles
       this.position.y = next.y;
     }
+
+    // update facing direction
+    if (this.velocity.x !== 0 || this.velocity.y !== 0) {
+      this.facing = direction(this.velocity.x, this.velocity.y);
+    }
   }
 
   /**
