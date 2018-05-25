@@ -135,7 +135,13 @@ export default class World {
   update(time, delta) {
     if (this.bodies.size === 0) { return; }
 
-    this.bodies.each((body) => { if (body.enable) body.update(delta); });
+    this.bodies.each((body) => {
+      if (!body.enable) { return; }
+      body.update(delta);
+      this.transition(body);
+      this.tilemap.transition(body);
+      if (body.onTile) this.tilemap.on(body);
+    });
   }
 
   /**

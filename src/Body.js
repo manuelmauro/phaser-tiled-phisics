@@ -87,16 +87,7 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.width = this.world.tilesize.x;
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#height
-     * @type
-     * @since 0.1.0
-     */
-    this.height = this.world.tilesize.y;
+    this.size = new Phaser.Math.Vector2(this.world.tilesize.x, this.world.tilesize.y);
 
     /**
      * [description]
@@ -156,8 +147,6 @@ class Body {
     }
 
     // compute the behavior of the body moving between two tiles
-    this.world.tilemap.transition(this);
-    this.world.transition(this);
     this.events.emit('Transition');
     this.onTile = false;
 
@@ -193,7 +182,6 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this);
     } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
       // the body moved one tile left
       // update body
@@ -202,7 +190,6 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this);
     } else {
       // the body is moving between two tiles
       this.position.x = next.x;
@@ -218,7 +205,6 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this);
     } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
       // the body moved one tile up
       // update body
@@ -227,7 +213,6 @@ class Body {
       this.onTile = true;
       // emit events
       this.events.emit('Tile');
-      this.world.tilemap.on(this);
     } else {
       // the body is moving between two tiles
       this.position.y = next.y;
@@ -281,8 +266,7 @@ class Body {
    * @return {Physics.Tiled.Body} This Body object.
    */
   setSize(width, height) {
-    this.width = width;
-    this.height = height;
+    this.size.set(width, height);
     return this;
   }
 
