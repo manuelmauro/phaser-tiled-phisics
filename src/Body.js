@@ -369,8 +369,55 @@ class Body {
   stop() {
     this.velocity.set(0, 0);
     this.acceleration.set(0, 0);
-    this.lineUp();
     return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method Physics.Tiled.Body#deltaAbsX
+   * @since 3.0.0
+   *
+   * @return {number} [description]
+   */
+  deltaAbsX() {
+    return (this.deltaX() > 0) ? this.deltaX() : -this.deltaX();
+  }
+
+  /**
+   * [description]
+   *
+   * @method Physics.Tiled.Body#deltaAbsY
+   * @since 3.0.0
+   *
+   * @return {number} [description]
+   */
+  deltaAbsY() {
+    return (this.deltaY() > 0) ? this.deltaY() : -this.deltaY();
+  }
+
+  /**
+   * [description]
+   *
+   * @method Physics.Tiled.Body#deltaX
+   * @since 3.0.0
+   *
+   * @return {number} [description]
+   */
+  deltaX() {
+    return this.position.x - this.prev.x;
+  }
+
+  /**
+   * [description]
+   *
+   * @method Physics.Tiled.Body#deltaY
+   * @since 3.0.0
+   *
+   * @return {number} [description]
+   */
+  deltaY() {
+    return this.position.y - this.prev.y;
   }
 
   /**
