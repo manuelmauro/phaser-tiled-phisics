@@ -51,7 +51,16 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.position = new Phaser.Math.Vector2();
+    this.position = new Phaser.Math.Vector2(gameObject.x, gameObject.y);
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#prev
+     * @type
+     * @since 0.1.0
+     */
+    this.prev = new Phaser.Math.Vector2(gameObject.x, gameObject.y);
 
     /**
      * [description]
@@ -65,6 +74,24 @@ class Body {
     /**
      * [description]
      *
+     * @name Physics.Tiled.Body#width
+     * @type
+     * @since 0.1.0
+     */
+    this.width = this.world.tilesize.x;
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#height
+     * @type
+     * @since 0.1.0
+     */
+    this.height = this.world.tilesize.y;
+
+    /**
+     * [description]
+     *
      * @name Physics.Tiled.Body#velocity
      * @type
      * @since 0.1.0
@@ -74,20 +101,20 @@ class Body {
     /**
      * [description]
      *
+     * @name Physics.Tiled.Body#newVelocity
+     * @type
+     * @since 0.1.0
+     */
+    this.newVelocity = new Phaser.Math.Vector2();
+
+    /**
+     * [description]
+     *
      * @name Phaser.Physics.Arcade.Body#acceleration
      * @type {Phaser.Math.Vector2}
      * @since 3.0.0
      */
     this.acceleration = new Phaser.Math.Vector2();
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#width
-     * @type
-     * @since 0.1.0
-     */
-    this.size = new Phaser.Math.Vector2(this.world.tilesize.x, this.world.tilesize.y);
 
     /**
      * [description]
@@ -126,6 +153,15 @@ class Body {
      */
     this.onTile = true;
 
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#wasOnTile
+     * @type
+     * @since 0.1.0
+     */
+    this.wasOnTile = true;
+
     // init
     this.lineUp();
   }
@@ -154,18 +190,18 @@ class Body {
     // Newton's laws of motion
     // velocity
     this.velocity.x = this.velocity.x
-                    + (this.acceleration.x * (delta / 1000));
+                    + (this.acceleration.x * delta);
     this.velocity.y = this.velocity.y
-                    + (this.acceleration.y * (delta / 1000));
+                    + (this.acceleration.y * delta);
     // space
     const next = { };
     next.x = this.position.x
-           + (this.velocity.x * (delta / 1000))
-           + ((1 / 2) * this.acceleration.x * ((delta / 1000) ** 2));
+           + (this.velocity.x * delta)
+           + ((1 / 2) * this.acceleration.x * (delta ** 2));
     next.y = this.position.y
-           + (this.velocity.y * (delta / 1000))
-           + ((1 / 2) * this.acceleration.y * ((delta / 1000) ** 2));
+           + (this.velocity.y * delta)
 
+           + ((1 / 2) * this.acceleration.y * (delta ** 2));
     // make sure that the body goes through all the tiles along its path
     // x axis
     const twidth = this.world.tilesize.x;
@@ -281,8 +317,25 @@ class Body {
    * @return {Physics.Tiled.Body} This Body object.
    */
   setSize(width, height) {
-    this.size.set(width, height);
+    this.width = width;
+    this.height = height;
     return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} x - [description]
+   * @param {number} y - [description]
+   */
+  reset(x, y) {
+    this.stop();
+    this.gameObject.setPosition(x, y);
+    this.gameObject.getTopLeft(this.position);
+    this.prev.copy(this.position);
   }
 
   /**
@@ -305,16 +358,101 @@ class Body {
    *
    * @method
    * @since 0.1.0
+   */
+  destroy() {
+    this.enable = false;
+    this.world.pendingDestroy.set(this);
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
    *
    * @param {number} x - [description]
    * @param {number} y - [description]
    *
    * @return {Physics.Tiled.Body} This Body object.
    */
-  safeVelocity(x, y) {
-    if (this.onTile) {
-      this.velocity.set(x, y);
-    }
+  setVelocity(x, y) {
+    this.velocity.set(x, y);
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} value - [description]
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  setVelocityX(value) {
+    this.velocity.x = value;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} value - [description]
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  setVelocityY(value) {
+    this.velocity.y = value;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} x - [description]
+   * @param {number} y - [description]
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  setAcceleration(x, y) {
+    this.acceleration.set(x, y);
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} value - [description]
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  setAccelerationX(value) {
+    this.acceleration.x = value;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} value - [description]
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  setAccelerationY(value) {
+    this.acceleration.y = value;
     return this;
   }
 
@@ -332,17 +470,6 @@ class Body {
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
     return this;
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   */
-  destroy() {
-    this.enable = false;
-    this.world.pendingDestroy.set(this);
   }
 }
 
