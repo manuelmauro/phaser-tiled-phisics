@@ -67,6 +67,16 @@ export default class World {
      * @since 0.1.0
      */
     this.colliders = new Phaser.Structs.ProcessQueue();
+
+    /**
+     * [description]
+     *
+     * @name Phaser.Physics.Arcade.World#isPaused
+     * @type {boolean}
+     * @default false
+     * @since 3.0.0
+     */
+    this.isPaused = false;
   }
 
   /**
@@ -126,6 +136,32 @@ export default class World {
   /**
    * [description]
    *
+   * @method Physics.Tiled.World#pause
+   * @since 3.0.0
+   *
+   * @return {Physics.Tiled.World} This World object.
+   */
+  pause() {
+    this.isPaused = true;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method Physics.Tiled.World#resume
+   * @since 3.0.0
+   *
+   * @return {Physics.Tiled.World} This World object.
+   */
+  resume() {
+    this.isPaused = false;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
    * @method
    * @since 0.1.0
    *
@@ -133,7 +169,9 @@ export default class World {
    * @param
    */
   update(time, delta) {
-    if (this.bodies.size === 0) { return; }
+    if (this.isPaused || this.bodies.size === 0) {
+      return;
+    }
 
     this.delta = delta / 1000;
 
