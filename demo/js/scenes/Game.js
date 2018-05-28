@@ -77,7 +77,6 @@ class Game extends Phaser.Scene {
     this.physics.add.force(slime, layerOne);
 
     this.switch = false;
-    this.slime.body.events.on('Tile', this.backAndForth, this);
 
     // camera
     this.cameras.main.startFollow(this.player);
@@ -94,7 +93,8 @@ class Game extends Phaser.Scene {
   update(time, delta) {
     // bodies
     const speed = 50;
-    if (this.player.body.onTile) {
+    if (this.player.body.isOnTile ||
+       (this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0)) {
       if (this.keys.down.isDown) {
         this.player.body.setVelocity(0, speed);
       } else if (this.keys.left.isDown) {
@@ -104,6 +104,15 @@ class Game extends Phaser.Scene {
       } else if (this.keys.up.isDown) {
         this.player.body.setVelocity(0, -speed);
       }
+    }
+
+    if (this.slime.body.tile.x < 11 || !this.switch) {
+      this.slime.body.velocity.set(10, 0);
+      this.switch = false;
+    }
+    if (this.slime.body.tile.x > 14 || this.switch) {
+      this.slime.body.velocity.set(-10, 0);
+      this.switch = true;
     }
 
     // animations
@@ -137,17 +146,6 @@ class Game extends Phaser.Scene {
     anim = `slime_walk_${animDir}`;
     if (anim !== this.slime.anims.currentAnim.key) {
       this.slime.play(anim);
-    }
-  }
-
-  backAndForth() {
-    if (this.slime.body.tile.x < 11 || !this.switch) {
-      this.slime.body.velocity.set(10, 0);
-      this.switch = false;
-    }
-    if (this.slime.body.tile.x > 14 || this.switch) {
-      this.slime.body.velocity.set(-10, 0);
-      this.switch = true;
     }
   }
 }

@@ -69,7 +69,10 @@ class Body {
      * @type
      * @since 0.1.0
      */
-    this.tile = new Phaser.Math.Vector2();
+    this.tile = new Phaser.Math.Vector2(
+      Math.floor(this.position.x / this.world.tilesize.x),
+      Math.floor(this.position.y / this.world.tilesize.y)
+    );
 
     /**
      * [description]
@@ -158,20 +161,11 @@ class Body {
     /**
      * [description]
      *
-     * @name Physics.Tiled.Body#events
+     * @name Physics.Tiled.Body#isOnTile
      * @type
      * @since 0.1.0
      */
-    this.events = new Phaser.EventEmitter();
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#onTile
-     * @type
-     * @since 0.1.0
-     */
-    this.onTile = true;
+    this.isOnTile = true;
 
     /**
      * [description]
@@ -181,9 +175,6 @@ class Body {
      * @since 0.1.0
      */
     this.wasOnTile = true;
-
-    // init
-    this.lineUp();
   }
 
   /**
@@ -197,15 +188,7 @@ class Body {
   update(delta) {
     this.dirty = true;
 
-    // compute the behavior of the body moving between two tiles
-    this.events.emit('Transition');
-    this.onTile = false;
-
-    // on tile heart beat
-    if (this.velocity.x === 0 && this.velocity.y === 0) {
-      this.events.emit('Tile');
-      this.onTile = true;
-    }
+    this.isOnTile = false;
 
     if (this.moves) {
       this.velocity.x += this.acceleration.x * delta;
@@ -219,47 +202,33 @@ class Body {
       next.y = this.position.y + this.newVelocity.y;
 
       // make sure that the body goes through all the tiles along its path
-      // x axis
       const twidth = this.world.tilesize.x;
       if (Math.floor(next.x / twidth) > Math.floor(this.position.x / twidth)) {
         // the body moved one tile right
-        // update body
         this.tile.x = Math.floor(next.x / twidth);
         this.position.x = this.tile.x * twidth;
-        this.onTile = true;
-        // emit events
-        this.events.emit('Tile');
+        this.isOnTile = true;
       } else if (Math.ceil(next.x / twidth) < Math.ceil(this.position.x / twidth)) {
         // the body moved one tile left
-        // update body
         this.tile.x = Math.ceil(next.x / twidth);
         this.position.x = this.tile.x * twidth;
-        this.onTile = true;
-        // emit events
-        this.events.emit('Tile');
+        this.isOnTile = true;
       } else {
         // the body is moving between two tiles
         this.position.x = next.x;
       }
 
-      // y axis
       const theight = this.world.tilesize.x;
       if (Math.floor(next.y / theight) > Math.floor(this.position.y / theight)) {
         // the body moved one tile down
-        // update body
         this.tile.y = Math.floor(next.y / theight);
         this.position.y = this.tile.y * theight;
-        this.onTile = true;
-        // emit events
-        this.events.emit('Tile');
+        this.isOnTile = true;
       } else if (Math.ceil(next.y / theight) < Math.ceil(this.position.y / theight)) {
         // the body moved one tile up
-        // update body
         this.tile.y = Math.ceil(next.y / theight);
         this.position.y = this.tile.y * theight;
-        this.onTile = true;
-        // emit events
-        this.events.emit('Tile');
+        this.isOnTile = true;
       } else {
         // the body is moving between two tiles
         this.position.y = next.y;
@@ -286,7 +255,6 @@ class Body {
 
     this.dirty = false;
 
-    // apply changes to the graphical object
     this.gameObject.x = (this.position.x + (this.gameObject.width / 2)) - this.offset.x;
     this.gameObject.y = (this.position.y + (this.gameObject.height / 2)) - this.offset.y;
 
@@ -520,6 +488,21 @@ class Body {
    */
   setAccelerationY(value) {
     this.acceleration.y = value;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param {number} value - [description]
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  setImmovable(value) {
+    this.immovable = value;
     return this;
   }
 

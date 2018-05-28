@@ -142,7 +142,7 @@ export default class World {
       this.tilemap.transition(body);
       this.transition(body);
       body.update(this.delta);
-      if (body.onTile) this.tilemap.on(body);
+      if (body.isOnTile) this.tilemap.on(body);
     });
   }
 
