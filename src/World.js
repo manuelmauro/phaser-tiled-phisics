@@ -165,41 +165,6 @@ export default class World {
    * @method
    * @since 0.1.0
    *
-   * @param
-   * @param
-   */
-  update(time, delta) {
-    if (this.isPaused || this.bodies.size === 0) {
-      return;
-    }
-
-    this.delta = delta / 1000;
-
-    this.bodies.each((body) => {
-      if (!body.enable) { return; }
-      this.tilemap.transition(body);
-      this.transition(body);
-      body.update(this.delta);
-      if (body.isOnTile) this.tilemap.on(body);
-    });
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   */
-  postUpdate() {
-    this.bodies.each((body) => { if (body.enable) body.postUpdate(); });
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
    * @param collider - [description]
    */
   addCollider(collider) {
@@ -232,6 +197,41 @@ export default class World {
    */
   addNonElastic(body1, body2) {
     this.colliders.add(new NonElastic(body1, body2));
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @param
+   * @param
+   */
+  update(time, delta) {
+    if (this.isPaused || this.bodies.size === 0) {
+      return;
+    }
+
+    this.delta = delta / 1000;
+
+    this.bodies.each((body) => {
+      if (!body.enable) { return; }
+      this.tilemap.transition(body);
+      this.transition(body);
+      body.update(this.delta);
+      if (body.isOnTile) this.tilemap.on(body);
+    });
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   */
+  postUpdate() {
+    this.bodies.each((body) => { if (body.enable) body.postUpdate(); });
   }
 
   /**
