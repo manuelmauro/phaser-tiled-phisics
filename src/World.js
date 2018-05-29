@@ -74,7 +74,7 @@ export default class World {
      * @name Phaser.Physics.Arcade.World#isPaused
      * @type {boolean}
      * @default false
-     * @since 3.0.0
+     * @since 0.1.0
      */
     this.isPaused = false;
   }
@@ -137,7 +137,7 @@ export default class World {
    * [description]
    *
    * @method Physics.Tiled.World#pause
-   * @since 3.0.0
+   * @since 0.1.0
    *
    * @return {Physics.Tiled.World} This World object.
    */
@@ -150,7 +150,7 @@ export default class World {
    * [description]
    *
    * @method Physics.Tiled.World#resume
-   * @since 3.0.0
+   * @since 0.1.0
    *
    * @return {Physics.Tiled.World} This World object.
    */

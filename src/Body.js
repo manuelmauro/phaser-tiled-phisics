@@ -115,7 +115,7 @@ class Body {
      *
      * @name Phaser.Physics.Arcade.Body#acceleration
      * @type {Phaser.Math.Vector2}
-     * @since 3.0.0
+     * @since 0.1.0
      */
     this.acceleration = new Phaser.Math.Vector2();
 
@@ -134,7 +134,7 @@ class Body {
      * @name Phaser.Physics.Arcade.Body#immovable
      * @type {boolean}
      * @default false
-     * @since 3.0.0
+     * @since 0.1.0
      */
     this.immovable = false;
 
@@ -144,7 +144,7 @@ class Body {
      * @name Phaser.Physics.Arcade.Body#moves
      * @type {boolean}
      * @default true
-     * @since 3.0.0
+     * @since 0.1.0
      */
     this.moves = true;
 
@@ -344,7 +344,7 @@ class Body {
    * [description]
    *
    * @method Physics.Tiled.Body#deltaAbsX
-   * @since 3.0.0
+   * @since 0.1.0
    *
    * @return {number} [description]
    */
@@ -356,7 +356,7 @@ class Body {
    * [description]
    *
    * @method Physics.Tiled.Body#deltaAbsY
-   * @since 3.0.0
+   * @since 0.1.0
    *
    * @return {number} [description]
    */
@@ -368,7 +368,7 @@ class Body {
    * [description]
    *
    * @method Physics.Tiled.Body#deltaX
-   * @since 3.0.0
+   * @since 0.1.0
    *
    * @return {number} [description]
    */
@@ -380,7 +380,7 @@ class Body {
    * [description]
    *
    * @method Physics.Tiled.Body#deltaY
-   * @since 3.0.0
+   * @since 0.1.0
    *
    * @return {number} [description]
    */
@@ -520,6 +520,98 @@ class Body {
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
     return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#x
+   * @type {number}
+   * @since 0.1.0
+   */
+  get x() {
+    return this.position.x;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#x
+   * @type {number}
+   * @since 0.1.0
+   */
+  set x(value) {
+    this.position.x = value;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#y
+   * @type {number}
+   * @since 0.1.0
+   */
+  get y() {
+    return this.position.y;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#y
+   * @type {number}
+   * @since 0.1.0
+   */
+  set y(value) {
+    this.position.y = value;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#left
+   * @type {number}
+   * @readOnly
+   * @since 0.1.0
+   */
+  get left() {
+    return this.position.x;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#right
+   * @type {number}
+   * @readOnly
+   * @since 0.1.0
+   */
+  get right() {
+    return this.position.x + this.width;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#top
+   * @type {number}
+   * @readOnly
+   * @since 0.1.0
+   */
+  get top() {
+    return this.position.y;
+  }
+
+  /**
+   * [description]
+   *
+   * @name Physics.Tiled.Body#bottom
+   * @type {number}
+   * @readOnly
+   * @since 0.1.0
+   */
+  get bottom() {
+    return this.position.y + this.height;
   }
 }
 
