@@ -54,8 +54,7 @@ class Force {
    * @param tile - [description]
    */
   on(tile) {
-    const id = this.layer.data[tile.tx][tile.ty];
-    const props = this.layer.tileset.get(id) || {};
+    const props = this.layer.propertiesOf(tile.tx, tile.ty);
 
     if (props) {
       switch (props.forceDirection) {

@@ -49,11 +49,8 @@ class Collision {
    * @param tileTo - [description]
    */
   transition(tileFrom, tileTo) {
-    const tileFromId = this.layer.data[tileFrom.tx][tileFrom.ty];
-    const tileFromProps = this.layer.tileset.get(tileFromId) || {};
-
-    const tileToId = this.layer.data[tileTo.tx][tileTo.ty];
-    const tileToProps = this.layer.tileset.get(tileToId) || {};
+    const tileFromProps = this.layer.propertiesOf(tileFrom.tx, tileFrom.ty);
+    const tileToProps = this.layer.propertiesOf(tileTo.tx, tileTo.ty);
 
     if (tileFrom.ty === tileTo.ty - 1) {
       // move down
