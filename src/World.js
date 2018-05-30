@@ -7,7 +7,7 @@
 import Body from './Body';
 import Tilemap from './Tilemap';
 import Layer from './Layer';
-import NonElastic from './colliders/NonElastic';
+import Collider from './Collider';
 
 import CONST from './const';
 import { adjacent } from './utils/tile/index';
@@ -166,9 +166,13 @@ export default class World {
    * @since 0.1.0
    *
    * @param collider - [description]
+   *
+   * @return
    */
-  addCollider(collider) {
+  addCollider(body1, body2) {
+    const collider = new Collider(this, body1, body2);
     this.colliders.add(collider);
+    return collider;
   }
 
   /**
@@ -192,19 +196,6 @@ export default class World {
    * @method
    * @since 0.1.0
    *
-   * @param body - [description]
-   * @param layer - [description]
-   */
-  addNonElastic(body1, body2) {
-    this.colliders.add(new NonElastic(body1, body2));
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
    * @param
    * @param
    */
@@ -218,10 +209,11 @@ export default class World {
     this.bodies.each((body) => {
       if (!body.enable) { return; }
       this.tilemap.transition(body);
-      this.transition(body);
       body.update(this.delta);
       if (body.isOnTile) this.tilemap.on(body);
     });
+
+    this.colliders.update().forEach((collider) => { if (collider.active) collider.update(); });
   }
 
   /**
@@ -232,22 +224,5 @@ export default class World {
    */
   postUpdate() {
     this.bodies.each((body) => { if (body.enable) body.postUpdate(); });
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param body - [description]
-   */
-  transition(body) {
-    const tileFrom = { tx: body.tile.x, ty: body.tile.y };
-    const tileTo = adjacent(body.tile.x, body.tile.y, body.facing);
-    // compute colliders
-    this.colliders.update().forEach((collider) => {
-      if (collider.body1 === body) collider.transition(tileFrom, tileTo);
-    });
   }
 }

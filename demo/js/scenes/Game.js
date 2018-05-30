@@ -40,8 +40,11 @@ class Game extends Phaser.Scene {
     const one = map.createStaticLayer('one', tiles, 0, 0);
     makeAnimations(this);
 
-    this.slime = this.add.sprite(80, 48);
-    this.slime.play('slime_walk_down');
+    this.movingSlime = this.add.sprite(80, 48);
+    this.movingSlime.play('slime_walk_down');
+
+    this.stillSlime = this.add.sprite(80, 64);
+    this.stillSlime.play('slime_walk_down');
 
     this.player = this.add.sprite(8, 8);
     this.player.play('hero_face_down');
@@ -57,12 +60,15 @@ class Game extends Phaser.Scene {
     const player = this.physics.world.enable(this.player);
     this.player.body.setOffset(4, 8);
 
-    const slime = this.physics.world.enable(this.slime);
-    this.slime.body.setOffset(4, 8);
+    const movingSlime = this.physics.world.enable(this.movingSlime);
+    this.movingSlime.body.setOffset(4, 8);
+
+    const stillSlime = this.physics.world.enable(this.stillSlime);
+    this.stillSlime.body.setOffset(4, 8);
 
     // add colliders
-    this.physics.world.addNonElastic(player, slime);
-    this.physics.world.addNonElastic(slime, player);
+    this.physics.world.addCollider(player, movingSlime);
+    this.physics.world.addCollider(player, stillSlime);
 
     // add modifiers
     this.physics.add.collision(player, layerZero);
@@ -71,10 +77,16 @@ class Game extends Phaser.Scene {
     this.physics.add.force(player, layerOne);
     this.physics.add.inertia(player, layerOne);
 
-    this.physics.add.collision(slime, layerZero);
-    this.physics.add.collision(slime, layerOne);
-    this.physics.add.force(slime, layerZero);
-    this.physics.add.force(slime, layerOne);
+    this.physics.add.collision(movingSlime, layerZero);
+    this.physics.add.collision(movingSlime, layerOne);
+    this.physics.add.force(movingSlime, layerZero);
+    this.physics.add.force(movingSlime, layerOne);
+
+    this.physics.add.collision(stillSlime, layerZero);
+    this.physics.add.collision(stillSlime, layerOne);
+    this.physics.add.force(stillSlime, layerZero);
+    this.physics.add.force(stillSlime, layerOne);
+    this.physics.add.inertia(stillSlime, layerOne);
 
     this.switch = false;
 
@@ -106,12 +118,12 @@ class Game extends Phaser.Scene {
       }
     }
 
-    if (this.slime.body.tile.x < 11 || !this.switch) {
-      this.slime.body.velocity.set(10, 0);
+    if (this.movingSlime.body.tile.x < 11 || !this.switch) {
+      this.movingSlime.body.velocity.set(10, 0);
       this.switch = false;
     }
-    if (this.slime.body.tile.x > 14 || this.switch) {
-      this.slime.body.velocity.set(-10, 0);
+    if (this.movingSlime.body.tile.x > 14 || this.switch) {
+      this.movingSlime.body.velocity.set(-10, 0);
       this.switch = true;
     }
 
@@ -132,20 +144,20 @@ class Game extends Phaser.Scene {
     }
 
     animDir = '';
-    if (this.slime.body.velocity.y > 0) {
+    if (this.movingSlime.body.velocity.y > 0) {
       animDir = 'down';
-    } else if (this.slime.body.velocity.x < 0) {
+    } else if (this.movingSlime.body.velocity.x < 0) {
       animDir = 'left';
-    } else if (this.slime.body.velocity.x > 0) {
+    } else if (this.movingSlime.body.velocity.x > 0) {
       animDir = 'right';
-    } else if (this.slime.body.velocity.y < 0) {
+    } else if (this.movingSlime.body.velocity.y < 0) {
       animDir = 'up';
     } else {
       animDir = 'down';
     }
     anim = `slime_walk_${animDir}`;
-    if (anim !== this.slime.anims.currentAnim.key) {
-      this.slime.play(anim);
+    if (anim !== this.movingSlime.anims.currentAnim.key) {
+      this.movingSlime.play(anim);
     }
   }
 }

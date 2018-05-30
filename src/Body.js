@@ -71,7 +71,7 @@ class Body {
      */
     this.tile = new Phaser.Math.Vector2(
       Math.floor(this.position.x / this.world.tilesize.x),
-      Math.floor(this.position.y / this.world.tilesize.y)
+      Math.floor(this.position.y / this.world.tilesize.y),
     );
 
     /**
@@ -113,11 +113,38 @@ class Body {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Arcade.Body#acceleration
+     * @name Physics.Tiled.Body#acceleration
      * @type {Phaser.Math.Vector2}
      * @since 0.1.0
      */
     this.acceleration = new Phaser.Math.Vector2();
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#bounce
+     * @type {Phaser.Math.Vector2}
+     * @since 0.1.0
+     */
+    this.bounce = new Phaser.Math.Vector2();
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#friction
+     * @type {Phaser.Math.Vector2}
+     * @since 0.1.0
+     */
+    this.friction = new Phaser.Math.Vector2(1, 1);
+
+    /**
+     * [description]
+     *
+     * @name Physics.Tiled.Body#mass
+     * @type {Phaser.Math.Vector2}
+     * @since 0.1.0
+     */
+    this.mass = 1;
 
     /**
      * [description]
@@ -131,7 +158,7 @@ class Body {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Arcade.Body#immovable
+     * @name Physics.Tiled.Body#immovable
      * @type {boolean}
      * @default false
      * @since 0.1.0
@@ -141,7 +168,7 @@ class Body {
     /**
      * [description]
      *
-     * @name Phaser.Physics.Arcade.Body#moves
+     * @name Physics.Tiled.Body#moves
      * @type {boolean}
      * @default true
      * @since 0.1.0
@@ -166,15 +193,6 @@ class Body {
      * @since 0.1.0
      */
     this.isOnTile = true;
-
-    /**
-     * [description]
-     *
-     * @name Physics.Tiled.Body#wasOnTile
-     * @type
-     * @since 0.1.0
-     */
-    this.wasOnTile = true;
   }
 
   /**
