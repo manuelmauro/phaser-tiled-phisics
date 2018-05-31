@@ -47,7 +47,7 @@ class Collider {
   }
 
   update() {
-    if (this.body1.velocity.x > 0) {
+    if (this.body1.deltaX() !== 0) {
       if (intersects(this.body1, this.body2)) {
         separateX(this.body1, this.body2, false, this.OVERLAP_BIAS);
 
