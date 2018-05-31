@@ -10,7 +10,7 @@ import { getOverlapX } from './index';
  * [description]
  *
  * @function Physics.Tiled.separateX
- * @since 3.0.0
+ * @since 0.1.0
  *
  * @param {Physics.Tiled.Body} body1 - [description]
  * @param {Physics.Tiled.Body} body2 - [description]
@@ -22,7 +22,7 @@ import { getOverlapX } from './index';
 export default function separateX(body1, body2, overlapOnly, bias) {
   let overlap = getOverlapX(body1, body2, overlapOnly, bias);
 
-  //  Can't separate two immovable bodies, or a body with its own custom separation logic
+  //  Can't separate two immovable bodies
   if (overlapOnly || overlap === 0 || (body1.immovable && body2.immovable)) {
     //  return true if there was some overlap, otherwise false
     return (overlap !== 0);
