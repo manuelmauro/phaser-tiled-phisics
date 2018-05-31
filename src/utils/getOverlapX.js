@@ -8,7 +8,7 @@
  * [description]
  *
  * @function Physics.Tiled.getOverlapX
- * @since 3.0.0
+ * @since 0.1.0
  *
  * @param {Physics.Tiled.Body} body1 - [description]
  * @param {Physics.Tiled.Body} body2 - [description]
