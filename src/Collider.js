@@ -49,19 +49,19 @@ class Collider {
   update() {
     if (this.body1.deltaX() !== 0) {
       if (intersects(this.body1, this.body2)) {
-        separateX(this.body1, this.body2, false, this.OVERLAP_BIAS);
+        separateX(this.body1, this.body2, false, 0);
 
         //  Are they still intersecting? Let's do the other axis then
         if (intersects(this.body1, this.body2)) {
-          separateY(this.body1, this.body2, false, this.OVERLAP_BIAS);
+          separateY(this.body1, this.body2, false, 0);
         }
       }
     } else if (intersects(this.body1, this.body2)) {
-      separateY(this.body1, this.body2, false, this.OVERLAP_BIAS);
+      separateY(this.body1, this.body2, false, 0);
 
       //  Are they still intersecting? Let's do the other axis then
       if (intersects(this.body1, this.body2)) {
-        separateX(this.body1, this.body2, false, this.OVERLAP_BIAS);
+        separateX(this.body1, this.body2, false, 0);
       }
     }
   }
@@ -69,8 +69,8 @@ class Collider {
   /**
    * [description]
    *
-   * @method Phaser.Physics.Arcade.Collider#destroy
-   * @since 3.0.0
+   * @method Physics.Tiled.Collider#destroy
+   * @since 0.1.0
    */
   destroy() {
     this.world.removeCollider(this);
