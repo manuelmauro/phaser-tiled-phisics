@@ -546,8 +546,6 @@ class Body {
    * @return {Physics.Tiled.Body} This Body object.
    */
   lineUp() {
-    this.tile.x = Math.floor(this.gameObject.x / this.world.tilesize.x);
-    this.tile.y = Math.floor(this.gameObject.y / this.world.tilesize.y);
     this.position.x = this.world.tilesize.x * this.tile.x;
     this.position.y = this.world.tilesize.y * this.tile.y;
     return this;
