@@ -12,6 +12,20 @@ import { C } from '../utils/tile/index';
  * @property {int} [forceDirection] - [description]
  * @property {float} [forceIntensity] - [description]
  */
+
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Force
+ * @extends
+ * @memberOf Physics.Tiled.Modifiers
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.Body} body - [description]
+ * @param {Phaser.Tiled.Layer} layer - [description]
+ */
 class Force {
   constructor(body, layer) {
     /**

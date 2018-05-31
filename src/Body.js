@@ -6,6 +6,19 @@
 
 import { C, direction } from './utils/tile/index';
 
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Body
+ * @extends
+ * @memberOf Physics.Tiled
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.Tilemap} tilemap - [description]
+ * @param {Phaser.GameObjects.GameObject} gameObject - [description]
+ */
 class Body {
   constructor(world, gameObject) {
     /**

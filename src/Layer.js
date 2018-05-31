@@ -4,6 +4,18 @@
  * @license
  */
 
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Layer
+ * @extends
+ * @memberOf Physics.Tiled
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.Tilemap} tilemap - [description]
+ */
 class Layer {
   constructor(tilemap) {
     /**

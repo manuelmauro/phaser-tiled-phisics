@@ -7,6 +7,18 @@
 import World from './World';
 import Factory from './Factory';
 
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class TiledPhysics
+ * @extends
+ * @memberOf Physics.Tiled
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Phaser.Scene} scene - [description]
+ */
 class TiledPhysics {
   constructor(scene) {
     /**

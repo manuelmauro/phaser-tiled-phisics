@@ -13,7 +13,7 @@ class Collider {
      *
      * @name
      * @type
-     * @since 3.0.0
+     * @since 0.1.0
      */
     this.world = world;
 

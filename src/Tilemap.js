@@ -10,6 +10,18 @@ import Collision from './modifiers/Collision';
 import Force from './modifiers/Force';
 import Inertia from './modifiers/Inertia';
 
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Tilemap
+ * @extends
+ * @memberOf Physics.Tiled
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.World} world - [description]
+ */
 class Tilemap {
   constructor(world) {
     /**

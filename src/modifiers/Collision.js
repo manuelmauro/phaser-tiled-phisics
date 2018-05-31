@@ -18,6 +18,20 @@
  * @property {boolean} [outCollideUp] - [description]
  * @property {boolean} [collide] - [description]
  */
+
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Collision
+ * @extends
+ * @memberOf Physics.Tiled.Modifiers
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.Body} body - [description]
+ * @param {Phaser.Tiled.Layer} layer - [description]
+ */
 class Collision {
   constructor(body, layer) {
     /**

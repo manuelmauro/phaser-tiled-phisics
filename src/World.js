@@ -12,6 +12,19 @@ import Collider from './Collider';
 import CONST from './const';
 import { adjacent } from './utils/tile/index';
 
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class World
+ * @extends
+ * @memberOf Physics.Tiled
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Phaser.Scene} scene - [description]
+ * @param {WorldConfig} config - [description]
+ */
 export default class World {
   constructor(scene, config) {
     /**

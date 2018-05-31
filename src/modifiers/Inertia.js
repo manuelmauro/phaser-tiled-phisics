@@ -9,6 +9,20 @@
  *
  * @property {float} [inertia] - [description]
  */
+
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Inertia
+ * @extends
+ * @memberOf Physics.Tiled.Modifiers
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.Body} body - [description]
+ * @param {Phaser.Tiled.Layer} layer - [description]
+ */
 class Inertia {
   constructor(body, layer) {
     /**

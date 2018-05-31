@@ -4,6 +4,18 @@
  * @license
  */
 
+/**
+ * @classdesc
+ * [description]
+ *
+ * @class Factory
+ * @extends
+ * @memberOf Physics.Tiled
+ * @constructor
+ * @since 0.1.0
+ *
+ * @param {Physics.Tiled.World} world - [description]
+ */
 class Factory {
   constructor(world) {
     /**
