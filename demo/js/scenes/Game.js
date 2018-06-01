@@ -67,26 +67,11 @@ class Game extends Phaser.Scene {
     this.stillSlime.body.setOffset(4, 8);
 
     // add colliders
-    this.physics.world.addCollider(player, movingSlime);
-    this.physics.world.addCollider(player, stillSlime);
+    this.physics.add.collider(player, [movingSlime, stillSlime]);
+    this.physics.add.collider([player, movingSlime, stillSlime], [layerZero, layerOne]);
+    this.physics.add.force([player, movingSlime, stillSlime], [layerZero, layerOne]);
 
-    // add modifiers
-    this.physics.add.collision(player, layerZero);
-    this.physics.add.collision(player, layerOne);
-    this.physics.add.force(player, layerZero);
-    this.physics.add.force(player, layerOne);
-    this.physics.add.inertia(player, layerOne);
-
-    this.physics.add.collision(movingSlime, layerZero);
-    this.physics.add.collision(movingSlime, layerOne);
-    this.physics.add.force(movingSlime, layerZero);
-    this.physics.add.force(movingSlime, layerOne);
-
-    this.physics.add.collision(stillSlime, layerZero);
-    this.physics.add.collision(stillSlime, layerOne);
-    this.physics.add.force(stillSlime, layerZero);
-    this.physics.add.force(stillSlime, layerOne);
-    this.physics.add.inertia(stillSlime, layerOne);
+    this.physics.add.inertia([player, stillSlime], layerOne);
 
     this.switch = false;
 
