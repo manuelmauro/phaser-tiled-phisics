@@ -66,7 +66,7 @@ class Game extends Phaser.Scene {
     const stillSlime = this.physics.world.enable(this.stillSlime);
     this.stillSlime.body.setOffset(4, 8);
 
-    // add colliders
+    // add colliders and modifiers
     this.physics.add.collider(player, [movingSlime, stillSlime]);
     this.physics.add.collider([player, movingSlime, stillSlime], [layerZero, layerOne]);
     this.physics.add.force([player, movingSlime, stillSlime], [layerZero, layerOne]);
