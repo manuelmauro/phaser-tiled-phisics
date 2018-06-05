@@ -10,12 +10,12 @@ class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('basictiles', 'assets/images/basictiles.png');
-    this.load.tilemapTiledJSON('map', 'assets/maps/demo.json');
+    this.load.image('spaceship', 'assets/images/spaceship.png');
+    this.load.tilemapTiledJSON('map', 'assets/maps/spaceship.json');
 
     this.load.spritesheet(
       'hero',
-      'assets/images/hero.png',
+      'assets/images/robot.png',
       { frameWidth: 16, frameHeight: 16, endFrame: 39 },
     );
 
@@ -34,19 +34,19 @@ class Game extends Phaser.Scene {
     this.sys.install('TiledPhysics');
 
     const map = this.make.tilemap({ key: 'map' });
-    const tiles = map.addTilesetImage('basictiles', 'basictiles');
+    const tiles = map.addTilesetImage('spaceship', 'spaceship');
 
     const zero = map.createStaticLayer('zero', tiles, 0, 0);
     const one = map.createStaticLayer('one', tiles, 0, 0);
     makeAnimations(this);
 
-    this.movingSlime = this.add.sprite(80, 48);
+    this.movingSlime = this.add.sprite(80, 80);
     this.movingSlime.play('slime_walk_down');
 
     this.stillSlime = this.add.sprite(80, 64);
     this.stillSlime.play('slime_walk_down');
 
-    this.player = this.add.sprite(8, 8);
+    this.player = this.add.sprite(32, 32);
     this.player.play('hero_face_down');
 
     const two = map.createStaticLayer('two', tiles, 0, 0);
