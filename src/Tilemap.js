@@ -99,10 +99,10 @@ class Tilemap {
    * @since 0.1.0
    *
    * @param body - [description]
-   * @param layer - [description]
+   * @param layers - [description]
    */
-  addForce(body, layer) {
-    this.modifiers.add(new Force(body, layer));
+  addForce(body, layers) {
+    this.modifiers.add(new Force(body, layers));
     this.on(body);
   }
 

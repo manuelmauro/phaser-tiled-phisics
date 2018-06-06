@@ -87,14 +87,12 @@
                 },
              "64":
                 {
-                 "forceDirection":2,
-                 "forceIntensity":100,
+                 "forceX":100,
                  "inertia":1
                 },
              "65":
                 {
-                 "forceDirection":0,
-                 "forceIntensity":100,
+                 "forceY":100,
                  "inertia":1
                 },
              "66":
@@ -115,14 +113,12 @@
                 },
              "80":
                 {
-                 "forceDirection":3,
-                 "forceIntensity":100,
+                 "forceY":-100,
                  "inertia":1
                 },
              "81":
                 {
-                 "forceDirection":1,
-                 "forceIntensity":100,
+                 "forceX":-100,
                  "inertia":1
                 },
              "82":
@@ -178,14 +174,12 @@
                 },
              "64":
                 {
-                 "forceDirection":"int",
-                 "forceIntensity":"float",
+                 "forceX":"float",
                  "inertia":"float"
                 },
              "65":
                 {
-                 "forceDirection":"int",
-                 "forceIntensity":"float",
+                 "forceY":"float",
                  "inertia":"float"
                 },
              "66":
@@ -206,14 +200,12 @@
                 },
              "80":
                 {
-                 "forceDirection":"int",
-                 "forceIntensity":"float",
+                 "forceY":"float",
                  "inertia":"float"
                 },
              "81":
                 {
-                 "forceDirection":"int",
-                 "forceIntensity":"float",
+                 "forceX":"float",
                  "inertia":"float"
                 },
              "82":

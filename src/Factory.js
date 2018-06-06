@@ -123,30 +123,26 @@ class Factory {
 
     if (!object1isArray && !object2isArray) {
       if (object1 instanceof Body && object2 instanceof Layer) {
-        this.tilemap.addForce(object1, object2);
+        this.tilemap.addForce(object1, [object2]);
         this.tilemap.on(object1);
       }
     } else if (!object1isArray && object2isArray) {
-      for (let i = 0; i < object2.length; i++) {
-        if (object1 instanceof Body && object2[i] instanceof Layer) {
-          this.tilemap.addForce(object1, object2[i]);
-          this.tilemap.on(object1);
-        }
+      if (object1 instanceof Body) {
+        this.tilemap.addForce(object1, object2);
+        this.tilemap.on(object1);
       }
     } else if (object1isArray && !object2isArray) {
       for (let i = 0; i < object1.length; i++) {
         if (object1[i] instanceof Body && object2 instanceof Layer) {
-          this.tilemap.addForce(object1[i], object2);
+          this.tilemap.addForce(object1[i], [object2]);
           this.tilemap.on(object1[i]);
         }
       }
     } else {
       for (let i = 0; i < object1.length; i++) {
-        for (let j = 0; j < object2.length; j++) {
-          if (object1[i] instanceof Body && object2[j] instanceof Layer) {
-            this.tilemap.addForce(object1[i], object2[j]);
-            this.tilemap.on(object1[i]);
-          }
+        if (object1[i] instanceof Body) {
+          this.tilemap.addForce(object1[i], object2);
+          this.tilemap.on(object1[i]);
         }
       }
     }

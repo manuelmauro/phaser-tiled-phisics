@@ -9,8 +9,8 @@ import { C } from '../utils/tile/index';
 /**
  * @typedef {object} Tile
  *
- * @property {int} [forceDirection] - [description]
- * @property {float} [forceIntensity] - [description]
+ * @property {float} [forceX] - [description]
+ * @property {float} [forceY] - [description]
  */
 
 /**
@@ -24,10 +24,10 @@ import { C } from '../utils/tile/index';
  * @since 0.1.0
  *
  * @param {Physics.Tiled.Body} body - [description]
- * @param {Phaser.Tiled.Layer} layer - [description]
+ * @param {Phaser.Tiled.Layer} layers - [description]
  */
 class Force {
-  constructor(body, layer) {
+  constructor(body, layers) {
     /**
      * [description]
      *
@@ -44,7 +44,7 @@ class Force {
      * @type
      * @since 0.1.0
      */
-    this.layer = layer;
+    this.layers = layers;
   }
 
   /**
@@ -68,25 +68,19 @@ class Force {
    * @param tile - [description]
    */
   on(tile) {
-    const props = this.layer.propertiesOf(tile.tx, tile.ty);
+    let forceX = 0;
+    let forceY = 0;
 
-    if (props) {
-      switch (props.forceDirection) {
-        case C.DOWN:
-          this.body.acceleration.y = props.forceIntensity;
-          break;
-        case C.LEFT:
-          this.body.acceleration.x = -props.forceIntensity;
-          break;
-        case C.RIGHT:
-          this.body.acceleration.x = props.forceIntensity;
-          break;
-        case C.UP:
-          this.body.acceleration.y = -props.forceIntensity;
-          break;
-        default:
+    this.layers.forEach((layer) => {
+      const props = layer.propertiesOf(tile.tx, tile.ty);
+      if (props) {
+        forceX += (props.forceX) ? props.forceX : 0;
+        forceY += (props.forceY) ? props.forceY : 0;
       }
-    }
+    });
+
+    this.body.acceleration.x = forceX;
+    this.body.acceleration.y = forceY;
   }
 }
 
