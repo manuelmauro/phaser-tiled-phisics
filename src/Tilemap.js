@@ -86,10 +86,10 @@ class Tilemap {
    * @since 0.1.0
    *
    * @param body - [description]
-   * @param layer - [description]
+   * @param layers - [description]
    */
-  addCollision(body, layer) {
-    this.modifiers.add(new Collision(body, layer));
+  addCollision(body, layers) {
+    this.modifiers.add(new Collision(body, layers));
   }
 
   /**
@@ -103,7 +103,7 @@ class Tilemap {
    */
   addForce(body, layers) {
     this.modifiers.add(new Force(body, layers));
-    this.on(body);
+    this.modify(body);
   }
 
   /**
@@ -113,11 +113,11 @@ class Tilemap {
    * @since 0.1.0
    *
    * @param body - [description]
-   * @param layer - [description]
+   * @param layers - [description]
    */
-  addInertia(body, layer) {
-    this.modifiers.add(new Inertia(body, layer));
-    this.on(body);
+  addInertia(body, layers) {
+    this.modifiers.add(new Inertia(body, layers));
+    this.modify(body);
   }
 
   /**
@@ -128,28 +128,10 @@ class Tilemap {
    *
    * @param body - [description]
    */
-  transition(body) {
-    const tileFrom = { tx: body.tile.x, ty: body.tile.y };
-    const tileTo = adjacent(body.tile.x, body.tile.y, body.heading());
+  modify(body) {
     // compute modifiers
     this.modifiers.update().forEach((modifier) => {
-      if (modifier.body === body) modifier.transition(tileFrom, tileTo);
-    });
-  }
-
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param body - [description]
-   */
-  on(body) {
-    const tile = { tx: body.tile.x, ty: body.tile.y };
-    // compute modifiers
-    this.modifiers.update().forEach((modifier) => {
-      if (modifier.body === body) modifier.on(tile);
+      if (modifier.body === body) modifier.execute();
     });
   }
 }

@@ -21,10 +21,10 @@
  * @since 0.1.0
  *
  * @param {Physics.Tiled.Body} body - [description]
- * @param {Phaser.Tiled.Layer} layer - [description]
+ * @param {Phaser.Tiled.Layer} layers - [description]
  */
 class Inertia {
-  constructor(body, layer) {
+  constructor(body, layers) {
     /**
      * [description]
      *
@@ -41,7 +41,7 @@ class Inertia {
      * @type
      * @since 0.1.0
      */
-    this.layer = layer;
+    this.layers = layers;
   }
 
   /**
@@ -49,31 +49,22 @@ class Inertia {
    *
    * @method
    * @since 0.1.0
-   *
-   * @param tileFrom - [description]
-   * @param tileTo - [description]
    */
-  transition(tileFrom, tileTo) {
-  }
+  execute() {
+    if (this.body.isOnTile) {
+      for (let i = 0; i < this.layers.length; i++) {
+        const tile = { tx: this.body.tile.x, ty: this.body.tile.y };
+        const props = this.layers[i].propertiesOf(tile.tx, tile.ty);
 
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param tile - [description]
-   */
-  on(tile) {
-    const props = this.layer.propertiesOf(tile.tx, tile.ty);
+        if (!props.inertia) { props.inertia = 0; }
+        this.body.velocity.x = props.inertia * this.body.velocity.x;
+        this.body.velocity.y = props.inertia * this.body.velocity.y;
+        this.body.acceleration.x = props.inertia * this.body.acceleration.x;
+        this.body.acceleration.y = props.inertia * this.body.acceleration.y;
 
-    if (!props.inertia) { props.inertia = 0; }
-    this.body.velocity.x = props.inertia * this.body.velocity.x;
-    this.body.velocity.y = props.inertia * this.body.velocity.y;
-    this.body.acceleration.x = props.inertia * this.body.acceleration.x;
-    this.body.acceleration.y = props.inertia * this.body.acceleration.y;
-
-    this.body.sliding = props.friction > 0;
+        this.body.sliding = props.friction > 0;
+      }
+    }
   }
 }
 

@@ -68,38 +68,40 @@ class Factory {
     if (!object1isArray && !object2isArray) {
       if (object1 instanceof Body) {
         if (object2 instanceof Layer) {
-          this.tilemap.addCollision(object1, object2);
+          this.tilemap.addCollision(object1, [object2]);
         } else if (object2 instanceof Body) {
           this.world.addCollider(object1, object2);
         }
       }
     } else if (!object1isArray && object2isArray) {
-      for (let i = 0; i < object2.length; i++) {
-        if (object1 instanceof Body) {
-          if (object2[i] instanceof Layer) {
-            this.tilemap.addCollision(object1, object2[i]);
-          } else if (object2[i] instanceof Body) {
+      if (object2[0] instanceof Layer) {
+        this.tilemap.addCollision(object1, [object2]);
+      } else {
+        for (let i = 0; i < object2.length; i++) {
+          if (object1 instanceof Body && object2[i] instanceof Body) {
             this.world.addCollider(object1, object2[i]);
           }
         }
       }
     } else if (object1isArray && !object2isArray) {
-      for (let i = 0; i < object1.length; i++) {
-        if (object2 instanceof Body) {
-          if (object1[i] instanceof Layer) {
-            this.tilemap.addCollision(object2, object1[i]);
-          } else if (object1[i] instanceof Body) {
-            this.world.addCollider(object1[i], object2);
-          }
+      if (object2[0] instanceof Layer) {
+        for (let i = 0; i < object1.length; i++) {
+          this.tilemap.addCollision(object1[i], [object2]);
+        }
+      } else {
+        for (let i = 0; i < object1.length; i++) {
+          this.world.addCollider(object1[i], object2);
         }
       }
     } else {
       for (let i = 0; i < object1.length; i++) {
-        for (let j = 0; j < object2.length; j++) {
-          if (object1[i] instanceof Body) {
-            if (object2[j] instanceof Layer) {
-              this.tilemap.addCollision(object1[i], object2[j]);
-            } else if (object2[j] instanceof Body) {
+        if (object2[0] instanceof Layer) {
+          for (let i = 0; i < object1.length; i++) {
+            this.tilemap.addCollision(object1[i], object2);
+          }
+        } else {
+          for (let j = 0; j < object2.length; j++) {
+            if (object1[i] instanceof Body && object2[j] instanceof Body) {
               this.world.addCollider(object1[i], object2[j]);
             }
           }
@@ -124,25 +126,21 @@ class Factory {
     if (!object1isArray && !object2isArray) {
       if (object1 instanceof Body && object2 instanceof Layer) {
         this.tilemap.addForce(object1, [object2]);
-        this.tilemap.on(object1);
       }
     } else if (!object1isArray && object2isArray) {
       if (object1 instanceof Body) {
         this.tilemap.addForce(object1, object2);
-        this.tilemap.on(object1);
       }
     } else if (object1isArray && !object2isArray) {
       for (let i = 0; i < object1.length; i++) {
         if (object1[i] instanceof Body && object2 instanceof Layer) {
           this.tilemap.addForce(object1[i], [object2]);
-          this.tilemap.on(object1[i]);
         }
       }
     } else {
       for (let i = 0; i < object1.length; i++) {
         if (object1[i] instanceof Body) {
           this.tilemap.addForce(object1[i], object2);
-          this.tilemap.on(object1[i]);
         }
       }
     }
@@ -163,30 +161,22 @@ class Factory {
 
     if (!object1isArray && !object2isArray) {
       if (object1 instanceof Body && object2 instanceof Layer) {
-        this.tilemap.addInertia(object1, object2);
-        this.tilemap.on(object1);
+        this.tilemap.addInertia(object1, [object2]);
       }
     } else if (!object1isArray && object2isArray) {
-      for (let i = 0; i < object2.length; i++) {
-        if (object1 instanceof Body && object2[i] instanceof Layer) {
-          this.tilemap.addInertia(object1, object2[i]);
-          this.tilemap.on(object1);
-        }
+      if (object1 instanceof Body) {
+        this.tilemap.addInertia(object1, object2);
       }
     } else if (object1isArray && !object2isArray) {
       for (let i = 0; i < object1.length; i++) {
-        if (object1[i] instanceof Body && object2 instanceof Layer) {
-          this.tilemap.addInertia(object1[i], object2);
-          this.tilemap.on(object1[i]);
+        if (object1[i] instanceof Body) {
+          this.tilemap.addInertia(object1[i], [object2]);
         }
       }
     } else {
       for (let i = 0; i < object1.length; i++) {
-        for (let j = 0; j < object2.length; j++) {
-          if (object1[i] instanceof Body && object2[j] instanceof Layer) {
-            this.tilemap.addInertia(object1[i], object2[j]);
-            this.tilemap.on(object1[i]);
-          }
+        if (object1[i] instanceof Body) {
+          this.tilemap.addInertia(object1[i], object2);
         }
       }
     }

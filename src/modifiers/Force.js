@@ -52,35 +52,24 @@ class Force {
    *
    * @method
    * @since 0.1.0
-   *
-   * @param tileFrom - [description]
-   * @param tileTo - [description]
    */
-  transition(tileFrom, tileTo) {
-  }
+  execute() {
+    if (this.body.isOnTile) {
+      const tile = { tx: this.body.tile.x, ty: this.body.tile.y };
+      let forceX = 0;
+      let forceY = 0;
 
-  /**
-   * [description]
-   *
-   * @method
-   * @since 0.1.0
-   *
-   * @param tile - [description]
-   */
-  on(tile) {
-    let forceX = 0;
-    let forceY = 0;
+      this.layers.forEach((layer) => {
+        const props = layer.propertiesOf(tile.tx, tile.ty);
+        if (props) {
+          forceX += (props.forceX) ? props.forceX : 0;
+          forceY += (props.forceY) ? props.forceY : 0;
+        }
+      });
 
-    this.layers.forEach((layer) => {
-      const props = layer.propertiesOf(tile.tx, tile.ty);
-      if (props) {
-        forceX += (props.forceX) ? props.forceX : 0;
-        forceY += (props.forceY) ? props.forceY : 0;
-      }
-    });
-
-    this.body.acceleration.x = forceX;
-    this.body.acceleration.y = forceY;
+      this.body.acceleration.x = forceX;
+      this.body.acceleration.y = forceY;
+    }
   }
 }
 

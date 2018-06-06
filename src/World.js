@@ -221,12 +221,13 @@ export default class World {
 
     this.bodies.each((body) => {
       if (!body.enable) { return; }
-      this.tilemap.transition(body);
+      this.tilemap.modify(body);
       body.update(this.delta);
-      if (body.isOnTile) this.tilemap.on(body);
     });
 
-    this.colliders.update().forEach((collider) => { if (collider.active) collider.update(); });
+    this.colliders.update().forEach((collider) => {
+      if (collider.active) collider.update();
+    });
   }
 
   /**
