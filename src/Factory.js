@@ -75,7 +75,7 @@ class Factory {
       }
     } else if (!object1isArray && object2isArray) {
       if (object2[0] instanceof Layer) {
-        this.tilemap.addCollision(object1, [object2]);
+        this.tilemap.addCollision(object1, object2);
       } else {
         for (let i = 0; i < object2.length; i++) {
           if (object1 instanceof Body && object2[i] instanceof Body) {
