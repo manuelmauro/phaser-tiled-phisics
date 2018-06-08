@@ -1,5 +1,5 @@
 <div align="center">
-	<img width="300" src="https://gitlab.com/uploads/-/system/project/avatar/6281402/robot.png" alt="Awesome">
+	<img width="300" src="https://gitlab.com/uploads/-/system/project/avatar/6281402/robot.png">
 </div>
 
 # Tiled Physics for Phaser
