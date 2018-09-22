@@ -63,6 +63,7 @@ class Game extends Phaser.Scene {
 
     const movingSlime = this.physics.world.enable(this.movingSlime);
     this.movingSlime.body.setOffset(4, 8);
+    this.movingSlime.body.setVelocity(10, 0);
 
     const stillSlime = this.physics.world.enable(this.stillSlime);
     this.stillSlime.body.setOffset(4, 8);
@@ -109,13 +110,13 @@ class Game extends Phaser.Scene {
 
     if (this.movingSlime.body.tile.x < 11 || !this.switch) {
       if (this.movingSlime.body.isOnTile) {
-        this.movingSlime.body.velocity.set(10, 0);
+        this.movingSlime.body.setVelocity(10, 0);
       }
       this.switch = false;
     }
     if (this.movingSlime.body.tile.x > 14 || this.switch) {
       if (this.movingSlime.body.isOnTile) {
-        this.movingSlime.body.velocity.set(-10, 0);
+        this.movingSlime.body.setVelocity(-10, 0);
       }
       this.switch = true;
     }
