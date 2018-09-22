@@ -5,9 +5,9 @@
  */
 
 // modifiers
-import Collision from '../modifiers/Collision';
-import Force from '../modifiers/Force';
-import Inertia from '../modifiers/Inertia';
+import Collision from '../modifier/Collision';
+import Force from '../modifier/Force';
+import Inertia from '../modifier/Inertia';
 
 /**
  * @classdesc
