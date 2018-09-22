@@ -5,7 +5,7 @@
  */
 
 import World from './World';
-import Factory from './Factory';
+import Factory from './factory/Factory';
 
 /**
  * @classdesc
@@ -80,7 +80,7 @@ class TiledPhysics {
    */
   boot() {
     if (!this.world) {
-      this.world = new World(this.scene, this.config);
+      this.world = new World(this.scene, this.systems.game.config.physics.tiled);
       this.add = new Factory(this.world);
     }
 

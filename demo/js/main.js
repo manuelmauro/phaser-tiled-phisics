@@ -12,6 +12,8 @@ const config = {
   antialias: false,
   physics: {
     tiled: {
+      tileHeight: 8,
+      tileWidth: 8,
       debug: true,
     }
   },

@@ -4,11 +4,10 @@
  * @license
  */
 
-import { adjacent } from './utils/tile/index';
 // modifiers
-import Collision from './modifiers/Collision';
-import Force from './modifiers/Force';
-import Inertia from './modifiers/Inertia';
+import Collision from '../modifiers/Collision';
+import Force from '../modifiers/Force';
+import Inertia from '../modifiers/Inertia';
 
 /**
  * @classdesc

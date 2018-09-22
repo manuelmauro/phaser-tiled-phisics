@@ -4,13 +4,10 @@
  * @license
  */
 
-import Body from './Body';
-import Tilemap from './Tilemap';
-import Layer from './Layer';
-import Collider from './Collider';
-
-import CONST from './const';
-import { adjacent } from './utils/tile/index';
+import Body from './body/Body';
+import Tilemap from './tilemap/Tilemap';
+import Layer from './tilemap/Layer';
+import Collider from './collision/Collider';
 
 /**
  * @classdesc
@@ -27,6 +24,7 @@ import { adjacent } from './utils/tile/index';
  */
 export default class World {
   constructor(scene, config) {
+    if (!config) config = {};
     /**
      * [description]
      *
@@ -61,7 +59,7 @@ export default class World {
      * @type
      * @since 0.1.0
      */
-    this.tilesize = new Phaser.Math.Vector2(CONST.TILE_WIDTH, CONST.TILE_HEIGHT);
+    this.tilesize = new Phaser.Math.Vector2(config.tileWidth, config.tileHeight);
 
     /**
      * [description]

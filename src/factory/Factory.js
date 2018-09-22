@@ -4,8 +4,8 @@
  * @license
  */
 
-import Layer from './Layer';
-import Body from './Body';
+import Layer from '../tilemap/Layer';
+import Body from '../body/Body';
 
 /**
  * @classdesc

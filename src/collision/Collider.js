@@ -4,7 +4,7 @@
  * @license
  */
 
-import { intersects, separateX, separateY } from './utils/index';
+import { intersects, separateX, separateY } from '../utils/index';
 
 class Collider {
   constructor(world, body1, body2) {

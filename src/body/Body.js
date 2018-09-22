@@ -4,7 +4,7 @@
  * @license
  */
 
-import { C, direction } from './utils/tile/index';
+import { C, direction } from '../utils/tile/index';
 
 /**
  * @classdesc
