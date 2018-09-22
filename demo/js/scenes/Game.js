@@ -50,6 +50,7 @@ class Game extends Phaser.Scene {
     this.player.play('hero_face_down');
 
     const two = map.createStaticLayer('two', tiles, 0, 0);
+    two.depth = two.height + 1;
 
     // enable layers
     const layerZero = this.physics.world.enable(zero);
@@ -107,11 +108,15 @@ class Game extends Phaser.Scene {
     }
 
     if (this.movingSlime.body.tile.x < 11 || !this.switch) {
-      this.movingSlime.body.velocity.set(10, 0);
+      if (this.movingSlime.body.isOnTile) {
+        this.movingSlime.body.velocity.set(10, 0);
+      }
       this.switch = false;
     }
     if (this.movingSlime.body.tile.x > 14 || this.switch) {
-      this.movingSlime.body.velocity.set(-10, 0);
+      if (this.movingSlime.body.isOnTile) {
+        this.movingSlime.body.velocity.set(-10, 0);
+      }
       this.switch = true;
     }
 
@@ -147,6 +152,11 @@ class Game extends Phaser.Scene {
     if (anim !== this.movingSlime.anims.currentAnim.key) {
       this.movingSlime.play(anim);
     }
+
+    // top-down layering
+    this.player.depth = this.player.y + 0.1;
+    this.movingSlime.depth = this.movingSlime.y;
+    this.stillSlime.depth = this.stillSlime.y;
   }
 }
 
