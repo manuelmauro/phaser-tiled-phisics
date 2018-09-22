@@ -122,7 +122,7 @@ class TiledPhysics {
  * @private
  * @since 0.1.0
  */
-TiledPhysics.register = function (PluginManager) {
+TiledPhysics.register = (PluginManager) => {
   PluginManager.register('TiledPhysics', TiledPhysics, 'TiledPhysics');
 };
 
