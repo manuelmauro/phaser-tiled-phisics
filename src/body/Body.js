@@ -554,6 +554,32 @@ class Body {
   /**
    * [description]
    *
+   * @method
+   * @since 0.1.0
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  lineUpX() {
+    this.position.x = this.world.tilesize.x * this.tile.x;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
+   * @method
+   * @since 0.1.0
+   *
+   * @return {Physics.Tiled.Body} This Body object.
+   */
+  lineUpY() {
+    this.position.y = this.world.tilesize.y * this.tile.y;
+    return this;
+  }
+
+  /**
+   * [description]
+   *
    * @name Physics.Tiled.Body#x
    * @type {number}
    * @since 0.1.0
