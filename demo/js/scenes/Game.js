@@ -26,13 +26,13 @@ class Game extends Phaser.Scene {
     );
 
     // first you need to load the plugin
-    this.load.plugin('TiledPhysics', 'TiledPhysics.js');
+    this.load.scenePlugin({
+      key: 'TiledPhysics',
+      url: 'TiledPhysics.js',
+    });
   }
 
   create() {
-    // and then install it
-    this.sys.install('TiledPhysics');
-
     const map = this.make.tilemap({ key: 'map' });
     const tiles = map.addTilesetImage('spaceship', 'spaceship');
 
@@ -49,7 +49,7 @@ class Game extends Phaser.Scene {
     this.player = this.add.sprite(32, 32);
     this.player.play('hero_face_down');
 
-    const two = map.createStaticLayer('two', tiles, 0, 0);
+    const two = map.createDynamicLayer('two', tiles, 0, 0);
     two.depth = two.height + 1;
 
     // enable layers
