@@ -1,7 +1,7 @@
 # Setup
 You’ll need to install a few things before you have a working copy of the project.
 
-## 1. Clone this repo
+### Clone this repo
 
 Navigate into your workspace directory.
 
@@ -9,12 +9,12 @@ Run:
 
 ```git clone git@gitlab.com:gedl/phaser-tiled-physics.git```
 
-## 2. Install node.js and npm
+### Install node.js and npm
 
 https://nodejs.org/en/
 
 
-## 3. Install dependencies (optionally you could install [yarn](https://yarnpkg.com/))
+### Install dependencies (optionally you could install [yarn](https://yarnpkg.com/))
 
 Navigate to the cloned repo’s directory.
 
@@ -24,7 +24,7 @@ Run:
 
 or if you choose yarn, just run ```yarn```
 
-## 4. Run the demo
+### Run the demo
 
 Run:
 
@@ -37,7 +37,7 @@ Open your browser and enter localhost:3000 into the address bar.
 Also this will start a watch process, so you can change the source and the process will recompile and refresh the browser
 
 
-## Build for deployment
+### Build for deployment
 
 Run:
 
