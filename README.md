@@ -4,7 +4,7 @@ collide with other bodies, and are subject to tile modifiers like: collision,
 force, inertia, and many more to come.
 
 ## Installation
-In order to use the plugin, add the file ```TiledPhysics.js``` or its minified 
+In order to use the plugin, add the file ```TiledPhysics.js``` or its minified
 version to your assets (for instance inside ```assets/plugins/``` folder).
 
 Add the following lines to your Phaser config object:
@@ -22,7 +22,7 @@ const config = {
 };
 ```
 
-Finally you can install it to a specific scene adding to the ```preload()``` 
+Finally you can install it to a specific scene adding to the ```preload()```
 function the following lines:
 ```
 this.load.scenePlugin({
@@ -30,3 +30,7 @@ this.load.scenePlugin({
   url: 'assets/plugins/TiledPhysics.js',
 });
 ```
+
+## Thanks to
+- The Phaser team @photonstorm, @mikewesthad and @pavle-goloskokovic for building Phaser 3
+- @nkholski https://github.com/nkholski/phaser3-es6-webpack
