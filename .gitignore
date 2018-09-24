@@ -25,5 +25,4 @@ Thumbs.db
 node_modules/
 
 # Output folder
-dist/
 dev/
