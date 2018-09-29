@@ -12,7 +12,7 @@ version to your assets (for instance inside `assets/plugins/` folder).
 
 Add the following lines to your Phaser config object:
 
-```
+```js
 const config = {
   ...
   physics: {
@@ -27,7 +27,7 @@ const config = {
 
 Finally you can install it to a specific scene adding to the ```preload()```
 function the following lines:
-```
+```js
 this.load.scenePlugin({
   key: 'TiledPhysics',
   url: 'assets/plugins/TiledPhysics.js',
