@@ -37,4 +37,5 @@ this.load.scenePlugin({
 ## Thanks to
 - The Phaser team @photonstorm, @mikewesthad and @pavle-goloskokovic for building 
   Phaser 3, this project is deeply based on their Arcade physics
-- @nkholski https://github.com/nkholski/phaser3-es6-webpack
+- @nkholski for https://github.com/nkholski/phaser3-es6-webpack and his inspiring 
+  project https://github.com/nkholski/phaser-grid-physics
