@@ -1,0 +1,164 @@
+import 'phaser';
+
+import makeAnimations from '../anims/makeAnimations';
+
+class Game extends Phaser.Scene {
+  constructor() {
+    super({
+      key: 'Game',
+    });
+  }
+
+  preload() {
+    this.load.image('spaceship', 'assets/images/spaceship.png');
+    this.load.tilemapTiledJSON('map', 'assets/maps/spaceship.json');
+
+    this.load.spritesheet(
+      'hero',
+      'assets/images/robot.png',
+      { frameWidth: 16, frameHeight: 16, endFrame: 39 },
+    );
+
+    this.load.spritesheet(
+      'slime',
+      'assets/images/slime.png',
+      { frameWidth: 16, frameHeight: 16, endFrame: 15 },
+    );
+
+    // first you need to load the plugin
+    this.load.scenePlugin({
+      key: 'TiledPhysics',
+      url: 'TiledPhysics.js',
+    });
+  }
+
+  create() {
+    const map = this.make.tilemap({ key: 'map' });
+    const tiles = map.addTilesetImage('spaceship', 'spaceship');
+
+    const zero = map.createStaticLayer('zero', tiles, 0, 0);
+    const one = map.createStaticLayer('one', tiles, 0, 0);
+    makeAnimations(this);
+
+    this.movingSlime = this.add.sprite(80, 80);
+    this.movingSlime.play('slime_walk_down');
+
+    this.stillSlime = this.add.sprite(80, 64);
+    this.stillSlime.play('slime_walk_down');
+
+    this.player = this.add.sprite(32, 32);
+    this.player.play('hero_face_down');
+
+    const two = map.createDynamicLayer('two', tiles, 0, 0);
+    two.depth = two.height + 1;
+
+    // enable layers
+    const layerZero = this.physics.world.enable(zero);
+    const layerOne = this.physics.world.enable(one);
+    this.physics.world.enable(two);
+
+    // enable bodies
+    const player = this.physics.world.enable(this.player);
+    this.player.body.setOffset(4, 8);
+
+    const movingSlime = this.physics.world.enable(this.movingSlime);
+    this.movingSlime.body.setOffset(4, 8);
+    this.movingSlime.body.setVelocity(10, 0);
+
+    const stillSlime = this.physics.world.enable(this.stillSlime);
+    this.stillSlime.body.setOffset(4, 8);
+
+    // add colliders and modifiers
+    this.physics.add.collider(player, [movingSlime, stillSlime]);
+    this.physics.add.collider([player, movingSlime, stillSlime], [layerZero, layerOne]);
+    this.physics.add.force([player, movingSlime, stillSlime], [layerZero, layerOne]);
+
+    this.physics.add.inertia([player, stillSlime], layerOne);
+
+    this.switch = false;
+
+    // camera
+    this.cameras.main.startFollow(this.player);
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+    this.keys = {
+      up: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
+      left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
+      right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
+      down: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
+    };
+  }
+
+  update(time, delta) {
+    // bodies
+    if (this.player.body.velocity.x ** 2 < 2) this.player.body.velocity.x = 0;
+    if (this.player.body.velocity.y ** 2 < 2) this.player.body.velocity.y = 0;
+
+    const speed = 50;
+    if (this.player.body.isOnTile ||
+       (this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0)) {
+      if (this.keys.down.isDown) {
+        this.player.body.setVelocity(0, speed);
+      } else if (this.keys.left.isDown) {
+        this.player.body.setVelocity(-speed, 0);
+      } else if (this.keys.right.isDown) {
+        this.player.body.setVelocity(speed, 0);
+      } else if (this.keys.up.isDown) {
+        this.player.body.setVelocity(0, -speed);
+      }
+    }
+
+    if (this.movingSlime.body.tile.x < 11 || !this.switch) {
+      if (this.movingSlime.body.isOnTile) {
+        this.movingSlime.body.setVelocity(10, 0);
+      }
+      this.switch = false;
+    }
+    if (this.movingSlime.body.tile.x > 14 || this.switch) {
+      if (this.movingSlime.body.isOnTile) {
+        this.movingSlime.body.setVelocity(-10, 0);
+      }
+      this.switch = true;
+    }
+
+    // animations
+    let animDir = '';
+    if (this.player.body.velocity.y > 0) {
+      animDir = 'down';
+    } else if (this.player.body.velocity.x < 0) {
+      animDir = 'left';
+    } else if (this.player.body.velocity.x > 0) {
+      animDir = 'right';
+    } else if (this.player.body.velocity.y < 0) {
+      animDir = 'up';
+    }
+    let anim = `hero_walk_${animDir}`;
+    if (anim !== this.player.anims.currentAnim.key) {
+      this.player.play(anim);
+    }
+
+    animDir = '';
+    if (this.movingSlime.body.velocity.y > 0) {
+      animDir = 'down';
+    } else if (this.movingSlime.body.velocity.x < 0) {
+      animDir = 'left';
+    } else if (this.movingSlime.body.velocity.x > 0) {
+      animDir = 'right';
+    } else if (this.movingSlime.body.velocity.y < 0) {
+      animDir = 'up';
+    } else {
+      animDir = 'down';
+    }
+    anim = `slime_walk_${animDir}`;
+    if (anim !== this.movingSlime.anims.currentAnim.key) {
+      this.movingSlime.play(anim);
+    }
+
+    // top-down layering
+    this.player.depth = this.player.y + 0.1;
+    this.movingSlime.depth = this.movingSlime.y;
+    this.stillSlime.depth = this.stillSlime.y;
+  }
+}
+
+export default Game;
