@@ -23,8 +23,8 @@ module.exports = {
   devtool: 'cheap-source-map',
   output: {
     pathinfo: true,
-    path: path.resolve(__dirname, 'dev'),
-    publicPath: './dev/',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: './public/',
     library: '[name]',
     libraryTarget: 'umd',
     filename: '[name].js',
@@ -58,7 +58,7 @@ module.exports = {
       host: process.env.IP || 'localhost',
       port: process.env.PORT || 3000,
       server: {
-        baseDir: ['./', './dev'],
+        baseDir: ['./', './public'],
       },
     }),
   ],
