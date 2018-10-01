@@ -8,7 +8,7 @@ You can try a demo [here](https://gedl.gitlab.io/phaser-tiled-physics/)!
 change before v1.0.0 is released.
 
 ## Installation
-In order to use the plugin, add the file `TiledPhysics.js` or its minified
+In order to use the plugin, add the file `/dist/TiledPhysics.js` or its minified
 version to your assets (for instance inside `assets/plugins/` folder).
 
 Add the following lines to your Phaser config object:
