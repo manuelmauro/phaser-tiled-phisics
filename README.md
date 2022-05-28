@@ -3,9 +3,6 @@ A simple physics for a tiled world. Bodies move discreetely from tile to tile,
 collide with other bodies, and are subject to tile modifiers like: collision,
 force, inertia, and many more to come. 
 
-**Warning:** the project is under development, many features or interfaces may 
-change before v1.0.0 is released.
-
 ## Installation
 In order to use the plugin, add the file `/dist/TiledPhysics.js` or its minified
 version to your assets (for instance inside `assets/plugins/` folder).
