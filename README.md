@@ -2,7 +2,6 @@
 A simple physics for a tiled world. Bodies move discreetely from tile to tile,
 collide with other bodies, and are subject to tile modifiers like: collision,
 force, inertia, and many more to come. 
-You can try a demo [here](https://gedl.gitlab.io/phaser-tiled-physics/)!
 
 **Warning:** the project is under development, many features or interfaces may 
 change before v1.0.0 is released.
